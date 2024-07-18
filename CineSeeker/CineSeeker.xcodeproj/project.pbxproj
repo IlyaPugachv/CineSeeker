@@ -36,6 +36,9 @@
 		BC2B28D12C490D5C00329A3C /* inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */; };
 		BC2B28D22C490D5C00329A3C /* inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */; };
 		BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */; };
+		BC2B28D82C491FA800329A3C /* TopFilmsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */; };
+		BC2B28DA2C491FD700329A3C /* TopFilmsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28D92C491FD700329A3C /* TopFilmsCell.swift */; };
+		BC2B28DD2C49239E00329A3C /* FilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28DC2C49239E00329A3C /* FilmsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +74,9 @@
 		BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Regular.ttf"; sourceTree = "<group>"; };
 		BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Bold.ttf"; sourceTree = "<group>"; };
 		BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsCollectionView.swift; sourceTree = "<group>"; };
+		BC2B28D92C491FD700329A3C /* TopFilmsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsCell.swift; sourceTree = "<group>"; };
+		BC2B28DC2C49239E00329A3C /* FilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 		BC2B28682C45417700329A3C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BC2B28DB2C4922B200329A3C /* Model */,
 				BC2B28792C4547D700329A3C /* Extensions */,
 			);
 			path = Common;
@@ -185,6 +192,8 @@
 				BC2B287C2C4548AA00329A3C /* Home+Presenter.swift */,
 				BC2B287E2C4548BA00329A3C /* Home+View.swift */,
 				BC2B28802C4548C500329A3C /* HomeView.swift */,
+				BC2B28D52C491F5300329A3C /* Components */,
+				BC2B28D62C491F6300329A3C /* Cell */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -247,6 +256,30 @@
 				BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		BC2B28D52C491F5300329A3C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BC2B28D62C491F6300329A3C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28D92C491FD700329A3C /* TopFilmsCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BC2B28DB2C4922B200329A3C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28DC2C49239E00329A3C /* FilmsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC2B28C72C490AF600329A3C /* UILable+Extensions.swift in Sources */,
+				BC2B28D82C491FA800329A3C /* TopFilmsCollectionView.swift in Sources */,
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
 				BC2B287F2C4548BA00329A3C /* Home+View.swift in Sources */,
@@ -335,6 +369,8 @@
 				BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */,
 				BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */,
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
+				BC2B28DD2C49239E00329A3C /* FilmsModel.swift in Sources */,
+				BC2B28DA2C491FD700329A3C /* TopFilmsCell.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
 				BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,

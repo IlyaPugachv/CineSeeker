@@ -70,6 +70,8 @@ extension Home {
                 backgroundColor: .Colors.gray,
                 cornerRadius: 12
             )
+            
+            hideKeyboardWhenTappedAround()
         }
         
         private func layoutSubviews() {
