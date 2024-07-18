@@ -9,14 +9,9 @@ final class TabBarController: UITabBarController {
         let searchVC = Search.View(with: .init())
         let watchListVC = WatchList.View(with: .init())
         
-        homeVC.title = .Localization.home
-        searchVC.title = .Localization.search
-        watchListVC.title = .Localization.watchList
-        
         let nav1 = UINavigationController(rootViewController: homeVC)
         let nav2 = UINavigationController(rootViewController: searchVC)
         let nav3 = UINavigationController(rootViewController: watchListVC)
-        
         
         homeVC.tabBarItem = UITabBarItem(title: .Localization.home, image: UIImage(systemName: "house"), tag: 0)
         searchVC.tabBarItem = UITabBarItem(title: .Localization.search, image: UIImage(systemName: "magnifyingglass"), tag: 1)

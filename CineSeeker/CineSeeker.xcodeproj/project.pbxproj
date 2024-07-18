@@ -27,6 +27,14 @@
 		BC2B288D2C454A5F00329A3C /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B288C2C454A5F00329A3C /* WatchListView.swift */; };
 		BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28B72C49048500329A3C /* String+Localization.swift */; };
 		BC2B28C02C4905CA00329A3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28BE2C4905CA00329A3C /* Localizable.strings */; };
+		BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28C22C4908BE00329A3C /* UIColor+Extensions.swift */; };
+		BC2B28C52C490AA000329A3C /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28C42C490AA000329A3C /* UIView+Extensions.swift */; };
+		BC2B28C72C490AF600329A3C /* UILable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28C62C490AF600329A3C /* UILable+Extensions.swift */; };
+		BC2B28C92C490BAE00329A3C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28C82C490BAE00329A3C /* UIFont+Extensions.swift */; };
+		BC2B28CF2C490D5C00329A3C /* inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CB2C490D5C00329A3C /* inter-Medium.ttf */; };
+		BC2B28D02C490D5C00329A3C /* inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CC2C490D5C00329A3C /* inter-SemiBold.ttf */; };
+		BC2B28D12C490D5C00329A3C /* inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */; };
+		BC2B28D22C490D5C00329A3C /* inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +61,14 @@
 		BC2B28B72C49048500329A3C /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		BC2B28BF2C4905CA00329A3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../../../../../MinimalTodo/MinimalTodo/MinimalTodo/AppConstans/Localization/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC2B28C12C4905D200329A3C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../../../../../MinimalTodo/MinimalTodo/MinimalTodo/AppConstans/Localization/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BC2B28C22C4908BE00329A3C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		BC2B28C42C490AA000329A3C /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		BC2B28C62C490AF600329A3C /* UILable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILable+Extensions.swift"; sourceTree = "<group>"; };
+		BC2B28C82C490BAE00329A3C /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		BC2B28CB2C490D5C00329A3C /* inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Medium.ttf"; sourceTree = "<group>"; };
+		BC2B28CC2C490D5C00329A3C /* inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Regular.ttf"; sourceTree = "<group>"; };
+		BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +162,7 @@
 		BC2B286A2C4541D400329A3C /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				BC2B28CA2C490C1B00329A3C /* Fonts */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -194,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				BC2B287A2C4547ED00329A3C /* UIViewController+Extensions.swift */,
+				BC2B28C42C490AA000329A3C /* UIView+Extensions.swift */,
+				BC2B28C62C490AF600329A3C /* UILable+Extensions.swift */,
+				BC2B28C82C490BAE00329A3C /* UIFont+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +221,7 @@
 		BC2B288F2C48F23900329A3C /* Color */ = {
 			isa = PBXGroup;
 			children = (
+				BC2B28C22C4908BE00329A3C /* UIColor+Extensions.swift */,
 			);
 			path = Color;
 			sourceTree = "<group>";
@@ -212,6 +233,17 @@
 				BC2B28BE2C4905CA00329A3C /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		BC2B28CA2C490C1B00329A3C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */,
+				BC2B28CB2C490D5C00329A3C /* inter-Medium.ttf */,
+				BC2B28CC2C490D5C00329A3C /* inter-SemiBold.ttf */,
+				BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +305,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2B28D02C490D5C00329A3C /* inter-SemiBold.ttf in Resources */,
 				BC2B285B2C453F4200329A3C /* Assets.xcassets in Resources */,
+				BC2B28D22C490D5C00329A3C /* inter-Bold.ttf in Resources */,
+				BC2B28CF2C490D5C00329A3C /* inter-Medium.ttf in Resources */,
+				BC2B28D12C490D5C00329A3C /* inter-Regular.ttf in Resources */,
 				BC2B28C02C4905CA00329A3C /* Localizable.strings in Resources */,
 				BC2B285E2C453F4200329A3C /* Base in Resources */,
 			);
@@ -286,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2B28C72C490AF600329A3C /* UILable+Extensions.swift in Sources */,
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
 				BC2B287F2C4548BA00329A3C /* Home+View.swift in Sources */,
@@ -293,10 +330,13 @@
 				BC2B28522C453F4000329A3C /* AppDelegate.swift in Sources */,
 				BC2B28812C4548C500329A3C /* HomeView.swift in Sources */,
 				BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */,
+				BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */,
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,
 				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,
+				BC2B28C92C490BAE00329A3C /* UIFont+Extensions.swift in Sources */,
+				BC2B28C52C490AA000329A3C /* UIView+Extensions.swift in Sources */,
 				BC2B287B2C4547ED00329A3C /* UIViewController+Extensions.swift in Sources */,
 				BC2B28762C4546C300329A3C /* OnboardingView.swift in Sources */,
 				BC2B288D2C454A5F00329A3C /* WatchListView.swift in Sources */,

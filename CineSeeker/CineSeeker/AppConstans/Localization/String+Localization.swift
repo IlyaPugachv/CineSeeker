@@ -7,6 +7,7 @@ extension String {
         static var home: String { localise("home") }
         static var search: String { localise("search") }
         static var watchList: String { localise("watchList") }
+        static var whatDoYouWanToWatch: String { localise("whatDoYouWanToWatch") }
 
     }
 }

@@ -10,6 +10,7 @@ extension Home {
         
         // MARK: - Subviews -
        
+        private let topLabel: UILabel = .init()
        
         // MARK: - Initializers -
         
@@ -47,15 +48,31 @@ extension Home {
         }
         
         private func buildHierarchy() {
-           
+            view.backgroundColor = .Colors.darkGray
+            view.addView(topLabel)
         }
         
         private func configureSubviews() {
+            
+            topLabel.configureLabel(
+                text: .Localization.whatDoYouWanToWatch, 
+                font: .interSemibold(of: 18),
+                color: .white,
+                alignment: .left)
 
         }
         
         private func layoutSubviews() {
 
+            NSLayoutConstraint.activate([
+            
+                topLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
+                topLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
+                topLabel.widthAnchor.constraint(equalToConstant: 317),
+                topLabel.heightAnchor.constraint(equalToConstant: 27),
+            
+            ])
+            
         }
         
         private func setupActions() {
