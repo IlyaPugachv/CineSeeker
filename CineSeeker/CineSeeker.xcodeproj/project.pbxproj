@@ -35,6 +35,7 @@
 		BC2B28D02C490D5C00329A3C /* inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CC2C490D5C00329A3C /* inter-SemiBold.ttf */; };
 		BC2B28D12C490D5C00329A3C /* inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */; };
 		BC2B28D22C490D5C00329A3C /* inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */; };
+		BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		BC2B28CC2C490D5C00329A3C /* inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		BC2B28CD2C490D5C00329A3C /* inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Regular.ttf"; sourceTree = "<group>"; };
 		BC2B28CE2C490D5C00329A3C /* inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-Bold.ttf"; sourceTree = "<group>"; };
+		BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				BC2B28C42C490AA000329A3C /* UIView+Extensions.swift */,
 				BC2B28C62C490AF600329A3C /* UILable+Extensions.swift */,
 				BC2B28C82C490BAE00329A3C /* UIFont+Extensions.swift */,
+				BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */,
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
+				BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,
 				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,
 				BC2B28C92C490BAE00329A3C /* UIFont+Extensions.swift in Sources */,

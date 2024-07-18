@@ -11,6 +11,7 @@ extension Home {
         // MARK: - Subviews -
        
         private let topLabel: UILabel = .init()
+        private let searchTextField: UITextField = .init()
        
         // MARK: - Initializers -
         
@@ -50,6 +51,7 @@ extension Home {
         private func buildHierarchy() {
             view.backgroundColor = .Colors.darkGray
             view.addView(topLabel)
+            view.addView(searchTextField)
         }
         
         private func configureSubviews() {
@@ -59,7 +61,15 @@ extension Home {
                 font: .interSemibold(of: 18),
                 color: .white,
                 alignment: .left)
-
+            
+            searchTextField.configureTextField(
+                placeholder: .Localization.search,
+                font: .interRegular(of: 14),
+                icon: UIImage(systemName: "magnifyingglass"),
+                iconColor: .Colors.lightGray,
+                backgroundColor: .Colors.gray,
+                cornerRadius: 12
+            )
         }
         
         private func layoutSubviews() {
@@ -67,10 +77,13 @@ extension Home {
             NSLayoutConstraint.activate([
             
                 topLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
-                topLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
-                topLabel.widthAnchor.constraint(equalToConstant: 317),
-                topLabel.heightAnchor.constraint(equalToConstant: 27),
-            
+                topLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                
+                searchTextField.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 20),
+                searchTextField.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
+                searchTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                searchTextField.widthAnchor.constraint(equalToConstant: 327),
+                searchTextField.heightAnchor.constraint(equalToConstant: 42)
             ])
             
         }
