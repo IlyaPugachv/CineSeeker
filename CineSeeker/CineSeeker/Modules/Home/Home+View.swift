@@ -12,6 +12,8 @@ extension Home {
        
         private let topLabel: UILabel = .init()
         private let searchTextField: UITextField = .init()
+        
+        private let topFilmsCollectionView = TopFilmsCollectionView()
        
         // MARK: - Initializers -
         
@@ -32,6 +34,10 @@ extension Home {
         
         public override func viewDidLoad() {
             super.viewDidLoad()
+            
+            topFilmsCollectionView.dataSource = self
+            topFilmsCollectionView.delegate = self
+            
             setup()
         }
         
@@ -52,6 +58,7 @@ extension Home {
             view.backgroundColor = .Colors.darkGray
             view.addView(topLabel)
             view.addView(searchTextField)
+            view.addView(topFilmsCollectionView)
         }
         
         private func configureSubviews() {
@@ -85,9 +92,14 @@ extension Home {
                 searchTextField.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
                 searchTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 searchTextField.widthAnchor.constraint(equalToConstant: 327),
-                searchTextField.heightAnchor.constraint(equalToConstant: 42)
+                searchTextField.heightAnchor.constraint(equalToConstant: 42),
+                
+                topFilmsCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 30),
+                topFilmsCollectionView.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
+                topFilmsCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                topFilmsCollectionView.heightAnchor.constraint(equalToConstant: 210),
+                topFilmsCollectionView.widthAnchor.constraint(equalToConstant: 144)
             ])
-            
         }
         
         private func setupActions() {
@@ -99,5 +111,23 @@ extension Home {
 
 // MARK: - Extension View -
 
-extension Home.View: HomeView { }
+extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else { fatalError() }
+        
+        return cell
+    }
+    
+    
+    
+    
+    
+}
 

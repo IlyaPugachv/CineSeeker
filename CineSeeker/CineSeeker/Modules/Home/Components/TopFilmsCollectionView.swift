@@ -6,8 +6,8 @@ final class TopFilmsCollectionView: UICollectionView {
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 15
-        layout.itemSize = CGSize(width: 151, height: 236)
+        layout.minimumLineSpacing = 25
+        layout.itemSize = CGSize(width: 144, height: 210)
         return layout
     }()
     
@@ -37,6 +37,7 @@ final class TopFilmsCollectionView: UICollectionView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         contentInset = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: 19)
+        backgroundColor = .Colors.darkGray
     }
 }
 
