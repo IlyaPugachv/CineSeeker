@@ -25,6 +25,8 @@
 		BC2B28892C454A4A00329A3C /* WatchList+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28882C454A4A00329A3C /* WatchList+Presenter.swift */; };
 		BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B288A2C454A5500329A3C /* WatchList+View.swift */; };
 		BC2B288D2C454A5F00329A3C /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B288C2C454A5F00329A3C /* WatchListView.swift */; };
+		BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28B72C49048500329A3C /* String+Localization.swift */; };
+		BC2B28C02C4905CA00329A3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC2B28BE2C4905CA00329A3C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,9 @@
 		BC2B28882C454A4A00329A3C /* WatchList+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchList+Presenter.swift"; sourceTree = "<group>"; };
 		BC2B288A2C454A5500329A3C /* WatchList+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchList+View.swift"; sourceTree = "<group>"; };
 		BC2B288C2C454A5F00329A3C /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
+		BC2B28B72C49048500329A3C /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		BC2B28BF2C4905CA00329A3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../../../../../MinimalTodo/MinimalTodo/MinimalTodo/AppConstans/Localization/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BC2B28C12C4905D200329A3C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../../../../../MinimalTodo/MinimalTodo/MinimalTodo/AppConstans/Localization/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,8 @@
 		BC2B28672C45416C00329A3C /* AppConstans */ = {
 			isa = PBXGroup;
 			children = (
+				BC2B288F2C48F23900329A3C /* Color */,
+				BC2B28B82C49048500329A3C /* Localization */,
 			);
 			path = AppConstans;
 			sourceTree = "<group>";
@@ -191,6 +198,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		BC2B288F2C48F23900329A3C /* Color */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		BC2B28B82C49048500329A3C /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28B72C49048500329A3C /* String+Localization.swift */,
+				BC2B28BE2C4905CA00329A3C /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,6 +256,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = BC2B28452C453F4000329A3C;
 			productRefGroup = BC2B284F2C453F4000329A3C /* Products */;
@@ -250,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC2B285B2C453F4200329A3C /* Assets.xcassets in Resources */,
+				BC2B28C02C4905CA00329A3C /* Localizable.strings in Resources */,
 				BC2B285E2C453F4200329A3C /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +296,7 @@
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,
+				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,
 				BC2B287B2C4547ED00329A3C /* UIViewController+Extensions.swift in Sources */,
 				BC2B28762C4546C300329A3C /* OnboardingView.swift in Sources */,
 				BC2B288D2C454A5F00329A3C /* WatchListView.swift in Sources */,
@@ -289,6 +315,15 @@
 				BC2B285D2C453F4200329A3C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BC2B28BE2C4905CA00329A3C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC2B28BF2C4905CA00329A3C /* en */,
+				BC2B28C12C4905D200329A3C /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
