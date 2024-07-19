@@ -1,16 +1,17 @@
 import UIKit
 
-extension Home {
+extension Detail {
     class Presenter {
         
         // MARK: - Properties -
         
-        weak var view: HomeView?
+        weak var view: DetailView?
+        var image: UIImage?
         
         // MARK: - Initializers
         
-        public init() {
-            print(#function, self)
+        init(image: UIImage?) {
+            self.image = image
         }
         
         deinit {
@@ -19,9 +20,6 @@ extension Home {
         
         // MARK: - Methods -
         
-        func showFilmDetail(image: UIImage?) {
-            view?.navigate(to: Detail.View(with: .init(image: image)), animated: true)
-        }
-        
     }
 }
+

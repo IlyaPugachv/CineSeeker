@@ -1,6 +1,6 @@
 import UIKit
 
-extension Search {
+extension Detail {
     class View: UIViewController {
         
         // MARK: - Properties -
@@ -10,6 +10,7 @@ extension Search {
         
         // MARK: - Subviews -
        
+        private let posterFilmImageView: UIImageView = .init()
        
         // MARK: - Initializers -
         
@@ -48,13 +49,30 @@ extension Search {
         
         private func buildHierarchy() {
             view.backgroundColor = .Colors.darkGray
+            view.addView(posterFilmImageView)
         }
         
         private func configureSubviews() {
-
+            
+            posterFilmImageView.image = presenter.image
+            posterFilmImageView.contentMode = .scaleAspectFill
         }
         
         private func layoutSubviews() {
+            
+            NSLayoutConstraint.activate([
+            
+                posterFilmImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 50),
+                posterFilmImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                posterFilmImageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                posterFilmImageView.heightAnchor.constraint(equalToConstant: 210),
+                posterFilmImageView.widthAnchor.constraint(equalToConstant: 375)
+            
+            
+            
+            
+            
+            ])
 
         }
         
@@ -67,6 +85,7 @@ extension Search {
 
 // MARK: - Extension View -
 
-extension Search.View: SearchView { }
+extension Detail.View: DetailView { }
+
 
 

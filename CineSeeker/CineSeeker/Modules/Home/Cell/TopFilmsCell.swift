@@ -6,7 +6,7 @@ final class TopFilmsCell: UICollectionViewCell {
     
     static let reuseId = "TopFilmsCell"
     
-    private let posterImageView: UIImageView = {
+     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
