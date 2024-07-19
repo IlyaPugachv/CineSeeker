@@ -3,24 +3,18 @@ import UIKit
 extension Home {
     class View: UIViewController {
         
-        // MARK: - Properties -
-        
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
-        // MARK: - Subviews -
-       
         private let topLabel: UILabel = .init()
         private let searchTextField: UITextField = .init()
-        
         private let topFilmsCollectionView = TopFilmsCollectionView()
-       
-        // MARK: - Initializers -
+        
+        var movies: [MovieRandom] = []
         
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
-            
             presenter.view = self
         }
         
@@ -30,22 +24,15 @@ extension Home {
         
         deinit { }
         
-        // MARK: - Lifecycle -
-        
         public override func viewDidLoad() {
             super.viewDidLoad()
             
             topFilmsCollectionView.dataSource = self
             topFilmsCollectionView.delegate = self
             
+            fetchMovies()
             setup()
         }
-        
-        public override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-        }
-        
-        // MARK: - Methods -
         
         private func setup() {
             buildHierarchy()
@@ -62,12 +49,12 @@ extension Home {
         }
         
         private func configureSubviews() {
-            
             topLabel.configureLabel(
-                text: .Localization.whatDoYouWanToWatch, 
+                text: .Localization.whatDoYouWanToWatch,
                 font: .interSemibold(of: 18),
                 color: .white,
-                alignment: .left)
+                alignment: .left
+            )
             
             searchTextField.configureTextField(
                 placeholder: .Localization.search,
@@ -82,9 +69,7 @@ extension Home {
         }
         
         private func layoutSubviews() {
-
             NSLayoutConstraint.activate([
-            
                 topLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
                 topLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 
@@ -102,32 +87,40 @@ extension Home {
             ])
         }
         
-        private func setupActions() {
-
+        private func setupActions() {  }
         
+        private func fetchMovies() {
+            NetworkManager.getCollectionsFilms { result in
+                switch result {
+                case .success(let results):
+                    if let docs = results.docs {
+                        self.movies = docs
+                    }
+                    DispatchQueue.main.async {
+                        self.topFilmsCollectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print("Ошибка при загрузке данных: \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
 
-// MARK: - Extension View -
-
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else {
+            fatalError("Unable to dequeue TopFilmsCell")
+        }
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else { fatalError() }
+        let movie = movies[indexPath.item]
+        cell.configure(with: movie)
         
         return cell
     }
-    
-    
-    
-    
-    
 }
-
