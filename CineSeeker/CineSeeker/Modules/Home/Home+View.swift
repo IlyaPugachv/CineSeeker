@@ -42,7 +42,7 @@ extension Home {
         }
         
         private func buildHierarchy() {
-            view.backgroundColor = .Colors.darkGray
+            view.backgroundColor = .Colors.Font.darkGray
             view.addView(topLabel)
             view.addView(searchTextField)
             view.addView(topFilmsCollectionView)
@@ -60,8 +60,8 @@ extension Home {
                 placeholder: .Localization.search,
                 font: .interRegular(of: 14),
                 icon: UIImage(systemName: "magnifyingglass"),
-                iconColor: .Colors.lightGray,
-                backgroundColor: .Colors.gray,
+                iconColor: .Colors.Font.lightGray,
+                backgroundColor: .Colors.Font.gray,
                 cornerRadius: 12
             )
             
@@ -109,8 +109,7 @@ extension Home {
 
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -130,6 +129,12 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
             return
         }
         
-        presenter.showFilmDetail(image: image)
+        let movie = movies[indexPath.item]
+        
+        presenter.showFilmDetail(
+            imageMovie: image, 
+            nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+            rating: movie.rating?.imdb ?? 0.0
+        )
     }
 }

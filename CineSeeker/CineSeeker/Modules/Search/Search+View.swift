@@ -47,7 +47,7 @@ extension Search {
         }
         
         private func buildHierarchy() {
-            view.backgroundColor = .Colors.darkGray
+            view.backgroundColor = .Colors.Font.darkGray
         }
         
         private func configureSubviews() {

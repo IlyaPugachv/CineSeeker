@@ -3,6 +3,9 @@ import Foundation
 extension String {
     struct Localization {
         
+        //MARK: - ERROR -
+        static var errorGettingTheMovieName: String { localise("errorGettingTheMovieName")}
+        
         //MARK: - HOME -
         static var home: String { localise("home") }
         static var search: String { localise("search") }

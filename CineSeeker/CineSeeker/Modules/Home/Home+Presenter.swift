@@ -19,9 +19,8 @@ extension Home {
         
         // MARK: - Methods -
         
-        func showFilmDetail(image: UIImage?) {
-            view?.navigate(to: Detail.View(with: .init(image: image)), animated: true)
+        func showFilmDetail(imageMovie: UIImage?, nameMovie: String, rating: Double) {
+            view?.navigate(to: Detail.View(with: .init(image: imageMovie, title: nameMovie, rating: rating)), animated: true)
         }
-        
     }
 }

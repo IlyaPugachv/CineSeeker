@@ -37,7 +37,7 @@ final class TopFilmsCollectionView: UICollectionView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         contentInset = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: 19)
-        backgroundColor = .Colors.darkGray
+        backgroundColor = .Colors.Font.darkGray
     }
 }
 
