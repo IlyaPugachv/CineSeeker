@@ -6,7 +6,6 @@ extension Detail {
         // MARK: - Properties -
         
         var presenter: Presenter!
-        private lazy var safeArea = self.view.safeAreaLayoutGuide
         
         // MARK: - Subviews -
         
@@ -14,14 +13,14 @@ extension Detail {
         private let nameMovieLabel: UILabel = .init()
         
         private let blurView: UIVisualEffectView = .init(effect: UIBlurEffect(style: .light))
-        private let rating: UILabel = .init()
+        private let star: UIImageView = .init()
+        private let ratingLabel: UILabel = .init()
         
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
-            
             presenter.view = self
         }
         
@@ -56,13 +55,14 @@ extension Detail {
             view.addView(posterFilmImageView)
             view.addView(nameMovieLabel)
             posterFilmImageView.addView(blurView)
-            blurView.contentView.addView(rating)
+            blurView.contentView.addView(star)
+            blurView.contentView.addView(ratingLabel)
         }
         
         private func configureSubviews() {
-            
             posterFilmImageView.image = presenter.image
             posterFilmImageView.contentMode = .scaleAspectFill
+            posterFilmImageView.clipsToBounds = true
             
             nameMovieLabel.configureLabel(
                 text: presenter.title,
@@ -73,47 +73,54 @@ extension Detail {
             
             nameMovieLabel.numberOfLines = 0
             
-            rating.configureLabel(
+            blurView.layer.cornerRadius = 8
+            blurView.clipsToBounds = true
+            
+            ratingLabel.configureLabel(
                 text: "\(presenter.rating)",
-                font: .interBold(of: 15),
+                font: .interSemibold(of: 12),
                 color: .Colors.orange,
-                alignment: .center)
+                alignment: .center
+            )
+            
+            star.image = UIImage(systemName: "star")
+            star.tintColor = .Colors.orange
+            star.contentMode = .scaleAspectFit
         }
         
         private func layoutSubviews() {
             
+            
             NSLayoutConstraint.activate([
+                posterFilmImageView.topAnchor.constraint(equalTo: view.topAnchor),
+                posterFilmImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                posterFilmImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
                 
-                posterFilmImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 50),
-                posterFilmImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-                posterFilmImageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-                posterFilmImageView.heightAnchor.constraint(equalToConstant: 200),
-                
-                blurView.bottomAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor),
-                blurView.trailingAnchor.constraint(equalTo: posterFilmImageView.trailingAnchor, constant: -12),
+                blurView.bottomAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: -8),
+                blurView.trailingAnchor.constraint(equalTo: posterFilmImageView.trailingAnchor, constant: -8),
                 blurView.heightAnchor.constraint(equalToConstant: 24),
                 blurView.widthAnchor.constraint(equalToConstant: 54),
                 
-                rating.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor),
-                rating.centerYAnchor.constraint(equalTo: blurView.contentView.centerYAnchor),
+                star.centerYAnchor.constraint(equalTo: blurView.centerYAnchor),
+                star.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 3),
+                star.widthAnchor.constraint(equalToConstant: 16),
+                star.heightAnchor.constraint(equalToConstant: 16),
                 
-                nameMovieLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -175),
-                nameMovieLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
-                nameMovieLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
+                ratingLabel.centerYAnchor.constraint(equalTo: blurView.centerYAnchor),
+                ratingLabel.leadingAnchor.constraint(equalTo: star.trailingAnchor, constant: 3),
+                ratingLabel.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -3),
                 
+                nameMovieLabel.topAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: 20),
+                nameMovieLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+                nameMovieLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             ])
         }
         
-        private func setupActions() {
-            
-            
-        }
+        private func setupActions() { }
     }
 }
 
 // MARK: - Extension View -
 
 extension Detail.View: DetailView { }
-
-
-
