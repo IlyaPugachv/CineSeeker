@@ -50,6 +50,7 @@
 		BC2B28FC2C4A7EEC00329A3C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */; };
 		BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */; };
 		BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */; };
+		BCE471362C4FAB2F00FE52EB /* CustomSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */,
+				BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */,
 				BC2B28FC2C4A7EEC00329A3C /* DetailView.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
+				BCE471362C4FAB2F00FE52EB /* CustomSegmentedControll.swift in Sources */,
 				BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */,
 				BC2B28F82C4A7ECF00329A3C /* Detail+Presenter.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,

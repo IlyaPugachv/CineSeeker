@@ -38,6 +38,8 @@ extension Detail {
         
         private let mainStackView: UIStackView = .init()
         
+        private let customSegmentedControl = CustomSegmentedControl()
+        
         // MARK: - Initializers -
     
         public init(with presenter: Presenter) {
@@ -96,6 +98,8 @@ extension Detail {
             mainStackView.addArrangedSubview(actionStackView)
             
             view.addView(mainStackView)
+            
+            view.addView(customSegmentedControl)
         }
         
         private func configureSubviews() {
@@ -193,6 +197,10 @@ extension Detail {
                 alignment: .center,
                 distribution: .equalCentering
             )
+            
+            customSegmentedControl.buttonTitles = ["About Movie", "Reviews", "Cast"]
+            
+            
         }
         
         private func layoutSubviews() {
@@ -222,9 +230,15 @@ extension Detail {
                 nameMovieLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
                 
                 mainStackView.topAnchor.constraint(equalTo: nameMovieLabel.bottomAnchor, constant: 18),
-                mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
-                mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
-                mainStackView.heightAnchor.constraint(equalToConstant: 32)
+                mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
+                mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
+                mainStackView.heightAnchor.constraint(equalToConstant: 32),
+                
+                customSegmentedControl.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 20),
+                customSegmentedControl.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
+                customSegmentedControl.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+                customSegmentedControl.widthAnchor.constraint(equalToConstant: 200),
+                customSegmentedControl.heightAnchor.constraint(equalToConstant: 20)
             ])
         }
         
