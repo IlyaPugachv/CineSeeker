@@ -48,6 +48,8 @@
 		BC2B28F82C4A7ECF00329A3C /* Detail+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28F72C4A7ECF00329A3C /* Detail+Presenter.swift */; };
 		BC2B28FA2C4A7EE100329A3C /* Detail+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28F92C4A7EE100329A3C /* Detail+View.swift */; };
 		BC2B28FC2C4A7EEC00329A3C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */; };
+		BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */; };
+		BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		BC2B28F72C4A7ECF00329A3C /* Detail+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+Presenter.swift"; sourceTree = "<group>"; };
 		BC2B28F92C4A7EE100329A3C /* Detail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+View.swift"; sourceTree = "<group>"; };
 		BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +250,8 @@
 				BC2B28C62C490AF600329A3C /* UILable+Extensions.swift */,
 				BC2B28C82C490BAE00329A3C /* UIFont+Extensions.swift */,
 				BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */,
+				BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */,
+				BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -423,12 +429,14 @@
 				BC2B287F2C4548BA00329A3C /* Home+View.swift in Sources */,
 				BC2B286C2C45448800329A3C /* TabBarController.swift in Sources */,
 				BC2B28522C453F4000329A3C /* AppDelegate.swift in Sources */,
+				BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */,
 				BC2B28812C4548C500329A3C /* HomeView.swift in Sources */,
 				BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */,
 				BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */,
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
 				BC2B28DD2C49239E00329A3C /* FilmsModel.swift in Sources */,
 				BC2B28DA2C491FD700329A3C /* TopFilmsCell.swift in Sources */,
+				BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */,
 				BC2B28FC2C4A7EEC00329A3C /* DetailView.swift in Sources */,
 				BC2B287D2C4548AA00329A3C /* Home+Presenter.swift in Sources */,
 				BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */,

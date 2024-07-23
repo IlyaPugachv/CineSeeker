@@ -27,14 +27,14 @@ extension Detail {
         private let watchStackView: UIStackView = .init()
         
         private let watchImageView: UIImageView = .init()
-        private let durationFilmLabel: UILabel = .init()
+        private let movieLengthLabel: UILabel = .init()
         
         private let stripeTwo: UIView = .init()
         
         private let actionStackView: UIStackView = .init()
         
         private let actionImageView: UIImageView = .init()
-        private let actionFilmLabel: UILabel = .init()
+        private let genresFilmLabel: UILabel = .init()
         
         private let mainStackView: UIStackView = .init()
         
@@ -84,10 +84,10 @@ extension Detail {
             calendarStackView.addArrangedSubview(yearFilmLabel)
             
             watchStackView.addArrangedSubview(watchImageView)
-            watchStackView.addArrangedSubview(durationFilmLabel)
+            watchStackView.addArrangedSubview(movieLengthLabel)
             
             actionStackView.addArrangedSubview(actionImageView)
-            actionStackView.addArrangedSubview(actionFilmLabel)
+            actionStackView.addArrangedSubview(genresFilmLabel)
             
             mainStackView.addArrangedSubview(calendarStackView)
             mainStackView.addArrangedSubview(stripeOne)
@@ -125,58 +125,74 @@ extension Detail {
             star.image = UIImage(systemName: "star")
             star.tintColor = .Colors.orange
             star.contentMode = .scaleAspectFit
-            
-            calendarImageView.image = UIImage(systemName: "calendar")
-            calendarImageView.tintColor = .white
-            
-            yearFilmLabel.configureLabel(
-                text: "2021",
-                font: .interMedium(of: 12),
-                color: .white
+
+            calendarImageView.configureImage(
+                named: "CalendarBlank",
+                tintColor: .Colors.Font.lightGray
             )
             
-            stripeOne.backgroundColor = .white
+            yearFilmLabel.configureLabel(
+                text: "\(presenter.year)",
+                font: .interMedium(of: 12),
+                color: .Colors.Font.lightGray
+            )
+            
+            stripeOne.backgroundColor = .Colors.Font.lightGray
             stripeOne.widthAnchor.constraint(equalToConstant: 1).isActive = true
             stripeOne.heightAnchor.constraint(equalToConstant: 16).isActive = true
             
-            calendarStackView.axis = .horizontal
-            calendarStackView.spacing = 5
-            calendarStackView.alignment = .center
-            
-            watchImageView.image = UIImage(systemName: "stopwatch")
-            watchImageView.tintColor = .white
-            
-            durationFilmLabel.configureLabel(
-                text: "148 Minutes",
-                font: .interMedium(of: 12),
-                color: .white
+            calendarStackView.configureStackView(
+                axis: .horizontal,
+                spacing: 5,
+                alignment: .center
+            )
+      
+            watchImageView.configureImage(
+                named: "MovieLength",
+                tintColor: .Colors.Font.lightGray
             )
             
-            stripeTwo.backgroundColor = .white
+            movieLengthLabel.configureLabel(
+                text: "\(presenter.movieLength) \(String.Localization.minutes)",
+                font: .interMedium(of: 12),
+                color: .Colors.Font.lightGray,
+                numberOfLines: 1
+            )
+            
+            stripeTwo.backgroundColor = .Colors.Font.lightGray
             stripeTwo.widthAnchor.constraint(equalToConstant: 1).isActive = true
             stripeTwo.heightAnchor.constraint(equalToConstant: 16).isActive = true
             
-            watchStackView.axis = .horizontal
-            watchStackView.spacing = 5
-            watchStackView.alignment = .center
-            
-            actionImageView.image = UIImage(systemName: "seal")
-            actionImageView.tintColor = .white
-            
-            actionFilmLabel.configureLabel(
-                text: "Action",
-                font: .interMedium(of: 12),
-                color: .white
+            watchStackView.configureStackView(
+                axis: .horizontal,
+                spacing: 5,
+                alignment: .center
+            )
+           
+            actionImageView.configureImage(
+                named: "Genres",
+                tintColor: .Colors.Font.lightGray
             )
             
-            actionStackView.axis = .horizontal
-            actionStackView.spacing = 5
-            actionStackView.alignment = .center
+            genresFilmLabel.configureLabel(
+                text: presenter.genres,
+                font: .interMedium(of: 12),
+                color: .Colors.Font.lightGray,
+                numberOfLines: 0
+            )
             
-            mainStackView.axis = .horizontal
-            mainStackView.spacing = 10
-            mainStackView.alignment = .center
-            mainStackView.distribution = .equalSpacing
+            actionStackView.configureStackView(
+                axis: .horizontal,
+                spacing: 5,
+                alignment: .center
+            )
+            
+            mainStackView.configureStackView(
+                axis: .horizontal,
+                spacing: 10,
+                alignment: .center,
+                distribution: .equalCentering
+            )
         }
         
         private func layoutSubviews() {
@@ -205,9 +221,9 @@ extension Detail {
                 nameMovieLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
                 nameMovieLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
                 
-                mainStackView.topAnchor.constraint(equalTo: nameMovieLabel.bottomAnchor, constant: 20),
-                mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
-                mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
+                mainStackView.topAnchor.constraint(equalTo: nameMovieLabel.bottomAnchor, constant: 18),
+                mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
+                mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
                 mainStackView.heightAnchor.constraint(equalToConstant: 32)
             ])
         }

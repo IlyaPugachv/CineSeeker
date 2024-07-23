@@ -131,10 +131,15 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
         
         let movie = movies[indexPath.item]
         
-        presenter.showFilmDetail(
-            imageMovie: image, 
-            nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
-            rating: movie.rating?.imdb ?? 0.0
-        )
+        let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+               
+               presenter.showFilmDetail(
+                   imageMovie: image,
+                   nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+                   rating: movie.rating?.imdb ?? 0.0,
+                   year: movie.year ?? 2024,
+                   movieLength: movie.movieLength ?? 100,
+                   genres: genres
+               )
     }
 }
