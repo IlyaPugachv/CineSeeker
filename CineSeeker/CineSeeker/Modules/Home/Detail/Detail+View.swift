@@ -65,6 +65,7 @@ extension Detail {
             super.viewDidLoad()
             setup()
             configureNavigation()
+            customSegmentedControl.delegate = self
         }
         
         public override func viewWillAppear(_ animated: Bool) {
@@ -126,7 +127,7 @@ extension Detail {
             
             nameMovieLabel.configureLabel(
                 text: presenter.title,
-                font: .interSemibold(of: 18),
+                font: .interBold(of: 18),
                 color: .white,
                 alignment: .center
             )
@@ -138,7 +139,7 @@ extension Detail {
             
             ratingLabel.configureLabel(
                 text: "\(presenter.rating)",
-                font: .interSemibold(of: 12),
+                font: .interBold(of: 12),
                 color: .Colors.orange,
                 alignment: .center
             )
@@ -227,7 +228,6 @@ extension Detail {
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
-                
                 mainScrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
                 mainScrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
                 mainScrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
@@ -283,8 +283,42 @@ extension Detail {
     }
 }
 
-// MARK: - Extension View -
+// MARK: - CustomSegmentedControlDelegate -
 
-extension Detail.View: DetailView, UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { return true }
+extension Detail.View: DetailView, CustomSegmentedControlDelegate {
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            // Show About Movie
+            aboutMovieLabel.text = presenter.aboutMovie
+            aboutMovieLabel.isHidden = false
+            
+            // Hide other content if needed
+            // future content management here
+            
+        case 1:
+            // Show Reviews (Empty for now or setup future content)
+            aboutMovieLabel.isHidden = true
+            
+            // Show table view or other UI elements for reviews if implemented
+            
+        case 2:
+            // Show Cast (Empty for now or setup future content)
+            aboutMovieLabel.isHidden = true
+            
+            // Show table view or other UI elements for cast if implemented
+            
+        default:
+            break
+        }
+    }
 }
+
+// MARK: - UIGestureRecognizerDelegate -
+
+extension Detail.View: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
