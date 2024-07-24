@@ -1,7 +1,7 @@
 import UIKit
 
 extension Detail {
-    class View: UIViewController {
+    class View: UIViewController, UICollectionViewDelegate {
         
         // MARK: - Properties -
         
@@ -44,6 +44,10 @@ extension Detail {
         private let customSegmentedControl = CustomSegmentedControl()
         private let aboutMovieLabel: UILabel = .init()
         
+        // MARK: - Reviews Collection View -
+        
+        private let reviewsCollectionView = ReviewsCollectionView()
+        
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {
@@ -66,6 +70,7 @@ extension Detail {
             setup()
             configureNavigation()
             customSegmentedControl.delegate = self
+            change(to: 0)
         }
         
         public override func viewWillAppear(_ animated: Bool) {
@@ -116,11 +121,10 @@ extension Detail {
             contentView.addView(mainStackView)
             contentView.addView(customSegmentedControl)
             contentView.addView(aboutMovieLabel)
+            contentView.addView(reviewsCollectionView)
         }
         
         private func configureSubviews() {
-            mainScrollView.showsVerticalScrollIndicator = false
-            
             posterFilmImageView.image = presenter.image
             posterFilmImageView.contentMode = .scaleAspectFill
             posterFilmImageView.clipsToBounds = true
@@ -224,6 +228,11 @@ extension Detail {
                 color: .white,
                 numberOfLines: 0
             )
+            
+            reviewsCollectionView.dataSource = self
+            reviewsCollectionView.delegate = self
+            
+            reviewsCollectionView.isHidden = true
         }
         
         private func layoutSubviews() {
@@ -275,7 +284,12 @@ extension Detail {
                 aboutMovieLabel.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 25),
                 aboutMovieLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 aboutMovieLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-                aboutMovieLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                
+                reviewsCollectionView.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 25),
+                reviewsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                reviewsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+                reviewsCollectionView.heightAnchor.constraint(equalToConstant: 200), // Adjust height as needed
+                reviewsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             ])
         }
         
@@ -289,30 +303,56 @@ extension Detail.View: DetailView, CustomSegmentedControlDelegate {
     func change(to index: Int) {
         switch index {
         case 0:
-            // Show About Movie
             aboutMovieLabel.text = presenter.aboutMovie
             aboutMovieLabel.isHidden = false
-            
-            // Hide other content if needed
-            // future content management here
+            reviewsCollectionView.isHidden = true
             
         case 1:
-            // Show Reviews (Empty for now or setup future content)
             aboutMovieLabel.isHidden = true
+            reviewsCollectionView.isHidden = false
             
-            // Show table view or other UI elements for reviews if implemented
+            reviewsCollectionView.reloadData()
             
         case 2:
-            // Show Cast (Empty for now or setup future content)
             aboutMovieLabel.isHidden = true
-            
-            // Show table view or other UI elements for cast if implemented
-            
+            reviewsCollectionView.isHidden = true
+    
         default:
             break
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout -
+
+extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - UICollectionViewDataSource Methods -
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 4 }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ReviewsCell.reuseId,
+            for: indexPath) as! ReviewsCell
+        
+        cell.usernameLabel.text = "Iqbal Shafiq Rozaan"
+        cell.ratingLabel.text = "6.0"
+        cell.commentLabel.text = "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government."
+        
+        return cell
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout Methods -
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width - 24
+        return CGSize(width: width, height: 100)
+    }
+}
+
+
 
 // MARK: - UIGestureRecognizerDelegate -
 

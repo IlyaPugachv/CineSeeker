@@ -51,6 +51,8 @@
 		BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */; };
 		BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */; };
 		BCE471362C4FAB2F00FE52EB /* CustomSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */; };
+		BCE471382C51181100FE52EB /* ReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471372C51181100FE52EB /* ReviewsCell.swift */; };
+		BCE4713A2C511FF900FE52EB /* ReviewsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,8 @@
 		BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControll.swift; sourceTree = "<group>"; };
+		BCE471372C51181100FE52EB /* ReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCell.swift; sourceTree = "<group>"; };
+		BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +295,7 @@
 			children = (
 				BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */,
 				BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */,
+				BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				BC2B28D92C491FD700329A3C /* TopFilmsCell.swift */,
+				BCE471372C51181100FE52EB /* ReviewsCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -426,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC2B28C72C490AF600329A3C /* UILable+Extensions.swift in Sources */,
+				BCE471382C51181100FE52EB /* ReviewsCell.swift in Sources */,
 				BC2B28D82C491FA800329A3C /* TopFilmsCollectionView.swift in Sources */,
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
@@ -457,6 +464,7 @@
 				BC2B288D2C454A5F00329A3C /* WatchListView.swift in Sources */,
 				BC2B28722C45469E00329A3C /* Onboarding+Presenter.swift in Sources */,
 				BC2B28892C454A4A00329A3C /* WatchList+Presenter.swift in Sources */,
+				BCE4713A2C511FF900FE52EB /* ReviewsCollectionView.swift in Sources */,
 				BC2B28742C4546B500329A3C /* Onboarding+View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
