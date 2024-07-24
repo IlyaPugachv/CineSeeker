@@ -10,6 +10,9 @@ extension Detail {
         
         // MARK: - Subviews -
         
+        private let mainScrollView: UIScrollView = .init()
+        private let contentView: UIView = .init()
+        
         private let posterFilmImageView: UIImageView = .init()
         private let nameMovieLabel: UILabel = .init()
         
@@ -42,11 +45,12 @@ extension Detail {
         private let aboutMovieLabel: UILabel = .init()
         
         // MARK: - Initializers -
-    
+        
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
             presenter.view = self
+            self.hidesBottomBarWhenPushed = true
         }
         
         required init?(coder: NSCoder) {
@@ -60,10 +64,12 @@ extension Detail {
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
+            configureNavigation()
         }
         
         public override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            navigationController?.interactivePopGestureRecognizer?.delegate = self
         }
         
         // MARK: - Methods -
@@ -75,10 +81,18 @@ extension Detail {
             setupActions()
         }
         
+        private func configureNavigation() {
+            navigationItem.hidesBackButton = true
+        }
+        
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
-            view.addView(posterFilmImageView)
-            view.addView(nameMovieLabel)
+            
+            view.addView(mainScrollView)
+            mainScrollView.addView(contentView)
+            
+            contentView.addView(posterFilmImageView)
+            contentView.addView(nameMovieLabel)
             posterFilmImageView.addView(blurView)
             blurView.contentView.addView(star)
             blurView.contentView.addView(ratingLabel)
@@ -98,12 +112,14 @@ extension Detail {
             mainStackView.addArrangedSubview(stripeTwo)
             mainStackView.addArrangedSubview(actionStackView)
             
-            view.addView(mainStackView)
-            view.addView(customSegmentedControl)
-            view.addView(aboutMovieLabel)
+            contentView.addView(mainStackView)
+            contentView.addView(customSegmentedControl)
+            contentView.addView(aboutMovieLabel)
         }
         
         private func configureSubviews() {
+            mainScrollView.showsVerticalScrollIndicator = false
+            
             posterFilmImageView.image = presenter.image
             posterFilmImageView.contentMode = .scaleAspectFill
             posterFilmImageView.clipsToBounds = true
@@ -130,7 +146,7 @@ extension Detail {
             star.image = UIImage(systemName: "star")
             star.tintColor = .Colors.orange
             star.contentMode = .scaleAspectFit
-
+            
             calendarImageView.configureImage(
                 named: "CalendarBlank",
                 tintColor: .Colors.Font.lightGray
@@ -151,7 +167,7 @@ extension Detail {
                 spacing: 5,
                 alignment: .center
             )
-      
+            
             watchImageView.configureImage(
                 named: "MovieLength",
                 tintColor: .Colors.Font.lightGray
@@ -173,7 +189,7 @@ extension Detail {
                 spacing: 5,
                 alignment: .center
             )
-           
+            
             actionImageView.configureImage(
                 named: "Genres",
                 tintColor: .Colors.Font.lightGray
@@ -210,12 +226,23 @@ extension Detail {
         }
         
         private func layoutSubviews() {
-            
             NSLayoutConstraint.activate([
-                posterFilmImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                posterFilmImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                posterFilmImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
+                
+                mainScrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                mainScrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                mainScrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                mainScrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+                
+                contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
+                contentView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
+                contentView.trailingAnchor.constraint(equalTo: mainScrollView.trailingAnchor),
+                contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),
+                contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor),
+                
+                posterFilmImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                posterFilmImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                posterFilmImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
                 
                 blurView.bottomAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: -8),
                 blurView.trailingAnchor.constraint(equalTo: posterFilmImageView.trailingAnchor, constant: -8),
@@ -232,23 +259,23 @@ extension Detail {
                 ratingLabel.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -3),
                 
                 nameMovieLabel.topAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: 20),
-                nameMovieLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-                nameMovieLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+                nameMovieLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                nameMovieLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
                 
                 mainStackView.topAnchor.constraint(equalTo: nameMovieLabel.bottomAnchor, constant: 18),
-                mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
-                mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
+                mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
                 mainStackView.heightAnchor.constraint(equalToConstant: 32),
                 
                 customSegmentedControl.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 20),
                 customSegmentedControl.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
                 customSegmentedControl.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
-                customSegmentedControl.widthAnchor.constraint(equalToConstant: 200),
                 customSegmentedControl.heightAnchor.constraint(equalToConstant: 20),
                 
-                aboutMovieLabel.topAnchor.constraint(lessThanOrEqualTo: customSegmentedControl.bottomAnchor, constant: 25),
-                aboutMovieLabel.leadingAnchor.constraint(equalTo: customSegmentedControl.leadingAnchor),
-                aboutMovieLabel.trailingAnchor.constraint(equalTo: customSegmentedControl.trailingAnchor)
+                aboutMovieLabel.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 25),
+                aboutMovieLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                aboutMovieLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+                aboutMovieLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             ])
         }
         
@@ -258,4 +285,6 @@ extension Detail {
 
 // MARK: - Extension View -
 
-extension Detail.View: DetailView { }
+extension Detail.View: DetailView, UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { return true }
+}
