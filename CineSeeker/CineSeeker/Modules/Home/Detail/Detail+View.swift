@@ -39,6 +39,7 @@ extension Detail {
         private let mainStackView: UIStackView = .init()
         
         private let customSegmentedControl = CustomSegmentedControl()
+        private let aboutMovieLabel: UILabel = .init()
         
         // MARK: - Initializers -
     
@@ -98,8 +99,8 @@ extension Detail {
             mainStackView.addArrangedSubview(actionStackView)
             
             view.addView(mainStackView)
-            
             view.addView(customSegmentedControl)
+            view.addView(aboutMovieLabel)
         }
         
         private func configureSubviews() {
@@ -200,7 +201,12 @@ extension Detail {
             
             customSegmentedControl.buttonTitles = ["About Movie", "Reviews", "Cast"]
             
-            
+            aboutMovieLabel.configureLabel(
+                text: presenter.aboutMovie,
+                font: .interRegular(of: 12),
+                color: .white,
+                numberOfLines: 0
+            )
         }
         
         private func layoutSubviews() {
@@ -238,7 +244,11 @@ extension Detail {
                 customSegmentedControl.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
                 customSegmentedControl.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
                 customSegmentedControl.widthAnchor.constraint(equalToConstant: 200),
-                customSegmentedControl.heightAnchor.constraint(equalToConstant: 20)
+                customSegmentedControl.heightAnchor.constraint(equalToConstant: 20),
+                
+                aboutMovieLabel.topAnchor.constraint(lessThanOrEqualTo: customSegmentedControl.bottomAnchor, constant: 25),
+                aboutMovieLabel.leadingAnchor.constraint(equalTo: customSegmentedControl.leadingAnchor),
+                aboutMovieLabel.trailingAnchor.constraint(equalTo: customSegmentedControl.trailingAnchor)
             ])
         }
         

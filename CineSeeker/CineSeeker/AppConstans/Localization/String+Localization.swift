@@ -8,7 +8,8 @@ extension String {
         
         //MARK: - ERROR -
         static var errorGettingTheMovieName: String { localise("errorGettingTheMovieName")}
-        
+        static var errorWhenGettingTheMovieDescription: String { localise("errorWhenGettingTheMovieDescription")}
+     
         //MARK: - HOME -
         static var home: String { localise("home") }
         static var search: String { localise("search") }

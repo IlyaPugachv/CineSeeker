@@ -139,7 +139,8 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
                    rating: movie.rating?.imdb ?? 0.0,
                    year: movie.year ?? 2024,
                    movieLength: movie.movieLength ?? 100,
-                   genres: genres
+                   genres: genres,
+                   aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription
                )
     }
 }
