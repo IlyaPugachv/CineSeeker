@@ -24,11 +24,22 @@ struct MovieRandom: Codable {
     let ageRating: Int?
     let poster: Poster?
     let genres: [Genre]?
+    let persons: [Person]?
     let countries: [Country]?
     let top10: Int?
     let top250: Int?
     let isSeries: Bool?
     let ticketsOnSale: Bool?
+}
+
+struct Person: Codable {
+    let id: Int
+    let photo: String?
+    let name: String?
+    let enName: String?
+    let description: String?
+    let profession: String?
+    let enProfession: String?
 }
 
 struct Rating: Codable {

@@ -337,6 +337,7 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
             withReuseIdentifier: ReviewsCell.reuseId,
             for: indexPath) as! ReviewsCell
         
+        cell.profileImageView.image = UIImage(named: "photoUser")
         cell.usernameLabel.text = "Iqbal Shafiq Rozaan"
         cell.ratingLabel.text = "6.0"
         cell.commentLabel.text = "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government."
