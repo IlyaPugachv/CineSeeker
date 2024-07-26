@@ -89,6 +89,22 @@ extension Detail {
         
         private func configureNavigation() {
             navigationItem.hidesBackButton = true
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.tintColor = .white
+            
+            if #available(iOS 15.0, *) {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = .Colors.Font.darkGray
+                appearance.shadowColor = .clear
+                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                
+                navigationController?.navigationBar.standardAppearance = appearance
+                navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            } else {
+                navigationController?.navigationBar.barTintColor = .Colors.Font.darkGray
+            }
         }
         
         private func buildHierarchy() {
@@ -251,7 +267,7 @@ extension Detail {
                 posterFilmImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 posterFilmImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 posterFilmImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8),
                 
                 blurView.bottomAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: -8),
                 blurView.trailingAnchor.constraint(equalTo: posterFilmImageView.trailingAnchor, constant: -8),
