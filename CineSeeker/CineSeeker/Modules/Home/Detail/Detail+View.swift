@@ -88,10 +88,11 @@ extension Detail {
         }
         
         private func configureNavigation() {
+            let navBar = navigationController?.navigationBar
+            navBar?.isTranslucent = false
+            navBar?.tintColor = .white
+            navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
             navigationItem.hidesBackButton = true
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationController?.navigationBar.tintColor = .white
             
             if #available(iOS 15.0, *) {
                 let appearance = UINavigationBarAppearance()
@@ -100,10 +101,10 @@ extension Detail {
                 appearance.shadowColor = .clear
                 appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
                 
-                navigationController?.navigationBar.standardAppearance = appearance
-                navigationController?.navigationBar.scrollEdgeAppearance = appearance
+                navBar?.standardAppearance = appearance
+                navBar?.scrollEdgeAppearance = appearance
             } else {
-                navigationController?.navigationBar.barTintColor = .Colors.Font.darkGray
+                navBar?.barTintColor = .Colors.Font.darkGray
             }
         }
         
@@ -141,9 +142,11 @@ extension Detail {
         }
         
         private func configureSubviews() {
+            
+            mainScrollView.showsVerticalScrollIndicator = false
+            reviewsCollectionView.showsHorizontalScrollIndicator = false
+            
             posterFilmImageView.image = presenter.image
-            posterFilmImageView.contentMode = .scaleAspectFill
-            posterFilmImageView.clipsToBounds = true
             
             nameMovieLabel.configureLabel(
                 text: presenter.title,
@@ -267,7 +270,7 @@ extension Detail {
                 posterFilmImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 posterFilmImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 posterFilmImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8),
+                posterFilmImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
                 
                 blurView.bottomAnchor.constraint(equalTo: posterFilmImageView.bottomAnchor, constant: -8),
                 blurView.trailingAnchor.constraint(equalTo: posterFilmImageView.trailingAnchor, constant: -8),
@@ -304,7 +307,7 @@ extension Detail {
                 reviewsCollectionView.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 25),
                 reviewsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 reviewsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-                reviewsCollectionView.heightAnchor.constraint(equalToConstant: 200), // Adjust height as needed
+                reviewsCollectionView.heightAnchor.constraint(equalToConstant: 200),
                 reviewsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             ])
         }
@@ -332,7 +335,7 @@ extension Detail.View: DetailView, CustomSegmentedControlDelegate {
         case 2:
             aboutMovieLabel.isHidden = true
             reviewsCollectionView.isHidden = true
-    
+            
         default:
             break
         }
@@ -368,8 +371,6 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
         return CGSize(width: width, height: 100)
     }
 }
-
-
 
 // MARK: - UIGestureRecognizerDelegate -
 
