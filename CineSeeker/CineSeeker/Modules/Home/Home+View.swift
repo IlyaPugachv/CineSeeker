@@ -12,6 +12,8 @@ extension Home {
         
         var movies: [MovieRandom] = []
         
+        var review: [ReviewModel] = []
+        
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
@@ -131,16 +133,32 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
         
         let movie = movies[indexPath.item]
         
-        let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
-               
-               presenter.showFilmDetail(
-                   imageMovie: image,
-                   nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
-                   rating: movie.rating?.imdb ?? 0.0,
-                   year: movie.year ?? 2024,
-                   movieLength: movie.movieLength ?? 100,
-                   genres: genres,
-                   aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription
-               )
+        NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
+            switch result {
+            case .success(let reviewModel):
+                let reviews = reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
+                
+                let author = reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
+                
+                let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+                
+                DispatchQueue.main.async {
+                    self.presenter.showFilmDetail(
+                        imageMovie: image,
+                        nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+                        rating: movie.rating?.imdb ?? 0.0,
+                        year: movie.year ?? 2024,
+                        movieLength: movie.movieLength ?? 100,
+                        genres: genres,
+                        aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription, 
+                        autor: author,
+                        review: reviews
+                    )
+                }
+            case .failure(let error):
+                print("Error fetching reviews: \(error.localizedDescription)")
+            }
+        }
     }
+
 }

@@ -55,6 +55,7 @@
 		BCE4713A2C511FF900FE52EB /* ReviewsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */; };
 		BCE4713F2C53A40B00FE52EB /* ActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4713E2C53A40B00FE52EB /* ActorCell.swift */; };
 		BCE471412C53A4D500FE52EB /* ActorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471402C53A4D500FE52EB /* ActorModel.swift */; };
+		BCE471452C53B3AD00FE52EB /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471442C53B3AD00FE52EB /* ReviewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionView.swift; sourceTree = "<group>"; };
 		BCE4713E2C53A40B00FE52EB /* ActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCell.swift; sourceTree = "<group>"; };
 		BCE471402C53A4D500FE52EB /* ActorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorModel.swift; sourceTree = "<group>"; };
+		BCE471442C53B3AD00FE52EB /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,7 @@
 				BC2B28DC2C49239E00329A3C /* FilmsModel.swift */,
 				BC2B28E52C49267900329A3C /* APIConstans.swift */,
 				BCE471402C53A4D500FE52EB /* ActorModel.swift */,
+				BCE471442C53B3AD00FE52EB /* ReviewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				BC2B28D82C491FA800329A3C /* TopFilmsCollectionView.swift in Sources */,
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
+				BCE471452C53B3AD00FE52EB /* ReviewModel.swift in Sources */,
 				BC2B287F2C4548BA00329A3C /* Home+View.swift in Sources */,
 				BC2B286C2C45448800329A3C /* TabBarController.swift in Sources */,
 				BC2B28522C453F4000329A3C /* AppDelegate.swift in Sources */,

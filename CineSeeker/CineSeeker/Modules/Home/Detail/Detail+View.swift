@@ -347,7 +347,7 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     
     // MARK: - UICollectionViewDataSource Methods -
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 4 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 5 }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -356,9 +356,9 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
             for: indexPath) as! ReviewsCell
         
         cell.profileImageView.image = UIImage(named: "photoUser")
-        cell.usernameLabel.text = "Iqbal Shafiq Rozaan"
-        cell.ratingLabel.text = "6.0"
-        cell.commentLabel.text = "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government."
+        cell.usernameLabel.text = presenter.author
+        cell.ratingLabel.text = "6.3"
+        cell.commentLabel.text = presenter.review
         
         return cell
     }
@@ -366,8 +366,9 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     // MARK: - UICollectionViewDelegateFlowLayout Methods -
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width - 24
-        return CGSize(width: width, height: 100)
+        let width = collectionView.frame.width - 16 // Adjust width as needed
+        let height: CGFloat = 150 // Adjust height as needed
+        return CGSize(width: width, height: height)
     }
 }
 

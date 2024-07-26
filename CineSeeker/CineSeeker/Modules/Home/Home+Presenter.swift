@@ -19,7 +19,7 @@ extension Home {
         
         // MARK: - Methods -
         
-        func showFilmDetail(imageMovie: UIImage?, nameMovie: String, rating: Double, year: Int, movieLength: Int, genres: String, aboutMovie: String) {
+        func showFilmDetail(imageMovie: UIImage?, nameMovie: String, rating: Double, year: Int, movieLength: Int, genres: String, aboutMovie: String, autor: String, review: String) {
             
             view?.navigate(to: Detail.View(with: .init(
                 image: imageMovie,
@@ -28,7 +28,9 @@ extension Home {
                 year: year,
                 movieLength: movieLength,
                 genres: genres,
-                aboutMovie: aboutMovie)), animated: true)
+                aboutMovie: aboutMovie, 
+                autor: autor,
+                review: review)), animated: true)
         }
     }
 }

@@ -25,8 +25,8 @@ struct Docs: Codable {
     let profession: [Profession]
     let facts: [Facts]?
     let movies: [Movies]?
-    let updatedAt: Float?
-    let createdAt: Float?
+    let updatedAt: String?
+    let createdAt: String?
 }
 
 struct BirthPlace: Codable {

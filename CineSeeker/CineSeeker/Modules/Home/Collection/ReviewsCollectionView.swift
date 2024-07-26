@@ -9,6 +9,7 @@ class ReviewsCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 0 // Set horizontal spacing (if needed, adjust this value)
         super.init(frame: .zero, collectionViewLayout: layout)
         configureCollectionView()
     }

@@ -14,10 +14,12 @@ extension Detail {
         var movieLength: Int
         var genres: String
         var aboutMovie: String
+        var author: String
+        var review: String
         
         // MARK: - Initializers - 
         
-        init(image: UIImage?, title: String, rating: Double, year: Int, movieLength: Int, genres: String, aboutMovie: String) {
+        init(image: UIImage?, title: String, rating: Double, year: Int, movieLength: Int, genres: String, aboutMovie: String, autor: String, review: String) {
             self.image = image
             self.title = title
             self.rating = rating
@@ -25,6 +27,8 @@ extension Detail {
             self.movieLength = movieLength
             self.genres = genres
             self.aboutMovie = aboutMovie
+            self.author = autor
+            self.review = review
         }
         
         deinit {
