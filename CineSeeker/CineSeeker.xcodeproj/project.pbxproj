@@ -53,6 +53,8 @@
 		BCE471362C4FAB2F00FE52EB /* CustomSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */; };
 		BCE471382C51181100FE52EB /* ReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471372C51181100FE52EB /* ReviewsCell.swift */; };
 		BCE4713A2C511FF900FE52EB /* ReviewsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */; };
+		BCE4713F2C53A40B00FE52EB /* ActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4713E2C53A40B00FE52EB /* ActorCell.swift */; };
+		BCE471412C53A4D500FE52EB /* ActorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471402C53A4D500FE52EB /* ActorModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +103,8 @@
 		BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControll.swift; sourceTree = "<group>"; };
 		BCE471372C51181100FE52EB /* ReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCell.swift; sourceTree = "<group>"; };
 		BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionView.swift; sourceTree = "<group>"; };
+		BCE4713E2C53A40B00FE52EB /* ActorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCell.swift; sourceTree = "<group>"; };
+		BCE471402C53A4D500FE52EB /* ActorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,7 @@
 				BC2B287E2C4548BA00329A3C /* Home+View.swift */,
 				BC2B28802C4548C500329A3C /* HomeView.swift */,
 				BC2B28D52C491F5300329A3C /* Components */,
+				BCE4713D2C53A36B00FE52EB /* Collection */,
 				BC2B28D62C491F6300329A3C /* Cell */,
 			);
 			path = Home;
@@ -293,9 +298,7 @@
 		BC2B28D52C491F5300329A3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */,
 				BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */,
-				BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			children = (
 				BC2B28D92C491FD700329A3C /* TopFilmsCell.swift */,
 				BCE471372C51181100FE52EB /* ReviewsCell.swift */,
+				BCE4713E2C53A40B00FE52EB /* ActorCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -314,6 +318,7 @@
 			children = (
 				BC2B28DC2C49239E00329A3C /* FilmsModel.swift */,
 				BC2B28E52C49267900329A3C /* APIConstans.swift */,
+				BCE471402C53A4D500FE52EB /* ActorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +347,15 @@
 				BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		BCE4713D2C53A36B00FE52EB /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B28D72C491FA800329A3C /* TopFilmsCollectionView.swift */,
+				BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */,
+			);
+			path = Collection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,6 +456,7 @@
 				BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */,
 				BC2B28812C4548C500329A3C /* HomeView.swift in Sources */,
 				BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */,
+				BCE4713F2C53A40B00FE52EB /* ActorCell.swift in Sources */,
 				BC2B28C32C4908BE00329A3C /* UIColor+Extensions.swift in Sources */,
 				BC2B288B2C454A5500329A3C /* WatchList+View.swift in Sources */,
 				BC2B28DD2C49239E00329A3C /* FilmsModel.swift in Sources */,
@@ -456,6 +471,7 @@
 				BC2B28E12C4924CF00329A3C /* NetworkManager.swift in Sources */,
 				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,
 				BC2B28C92C490BAE00329A3C /* UIFont+Extensions.swift in Sources */,
+				BCE471412C53A4D500FE52EB /* ActorModel.swift in Sources */,
 				BC2B28FA2C4A7EE100329A3C /* Detail+View.swift in Sources */,
 				BC2B28C52C490AA000329A3C /* UIView+Extensions.swift in Sources */,
 				BC2B28E62C49267900329A3C /* APIConstans.swift in Sources */,

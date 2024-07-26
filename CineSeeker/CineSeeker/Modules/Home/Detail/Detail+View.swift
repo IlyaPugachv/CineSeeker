@@ -144,7 +144,6 @@ extension Detail {
         private func configureSubviews() {
             
             mainScrollView.showsVerticalScrollIndicator = false
-            reviewsCollectionView.showsHorizontalScrollIndicator = false
             
             posterFilmImageView.image = presenter.image
             
