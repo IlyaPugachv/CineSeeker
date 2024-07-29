@@ -36,6 +36,7 @@ extension WatchList {
         
         public override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            watchListCollection.reloadData()
         }
         
         // MARK: - Methods -
@@ -83,20 +84,24 @@ extension WatchList {
 extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
+        BookmarkManager.shared.getBookmarkedMovies().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchListCell.reuseId, for: indexPath) as! WatchListCell
         
-        cell.ratingLabel.text = "9.5"
-        cell.filmNameLabel.text = "SpiderMan"
-        cell.genreLabel.text = "Action"
-        cell.releaseDateLabel.text = "2019"
-        cell.movieLengthLabel.text = "139 minutes"
-        cell.profileImageView.image = UIImage(systemName: "bookmark")
-       
+        let bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
+        let movie = bookmarkedMovies[indexPath.row]
         
+        cell.ratingLabel.text = "\(movie.rating)"
+        cell.filmNameLabel.text = movie.title
+        cell.genreLabel.text = movie.genre
+        cell.releaseDateLabel.text = "\(movie.releaseDate)"
+        cell.movieLengthLabel.text = "\(movie.movieLength) minutes"
+        if let imageData = movie.posterImageData {
+            cell.profileImageView.image = UIImage(data: imageData)
+        }
+
         return cell
     }
 }

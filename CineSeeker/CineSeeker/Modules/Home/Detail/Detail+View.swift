@@ -302,12 +302,25 @@ extension Detail {
         
         private func setupActions() { }
         
-        @objc 
+        @objc
         private func bookmarkTapped() {
             isBookmarked.toggle()
-            
             let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
+
+            if isBookmarked {
+                let movie = BookmarkedMovie()
+                movie.title = presenter.title
+                movie.posterImageData = presenter.image?.pngData()
+                movie.rating = presenter.rating
+                movie.genre = presenter.genres
+                movie.releaseDate = presenter.year
+                movie.movieLength = presenter.movieLength
+
+                BookmarkManager.shared.addBookmark(movie: movie)
+            } else {
+                BookmarkManager.shared.removeBookmark(movieTitle: presenter.title)
+            }
         }
     }
 }
