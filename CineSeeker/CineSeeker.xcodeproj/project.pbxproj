@@ -48,6 +48,8 @@
 		BC2B28F82C4A7ECF00329A3C /* Detail+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28F72C4A7ECF00329A3C /* Detail+Presenter.swift */; };
 		BC2B28FA2C4A7EE100329A3C /* Detail+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28F92C4A7EE100329A3C /* Detail+View.swift */; };
 		BC2B28FC2C4A7EEC00329A3C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */; };
+		BC8928BC2C57845A001006AF /* WatchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8928BB2C57845A001006AF /* WatchListCell.swift */; };
+		BC8928BE2C57880D001006AF /* WatchListCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8928BD2C57880D001006AF /* WatchListCollection.swift */; };
 		BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */; };
 		BCE471342C4FA09B00FE52EB /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */; };
 		BCE471362C4FAB2F00FE52EB /* CustomSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */; };
@@ -99,6 +101,8 @@
 		BC2B28F72C4A7ECF00329A3C /* Detail+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+Presenter.swift"; sourceTree = "<group>"; };
 		BC2B28F92C4A7EE100329A3C /* Detail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+View.swift"; sourceTree = "<group>"; };
 		BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		BC8928BB2C57845A001006AF /* WatchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListCell.swift; sourceTree = "<group>"; };
+		BC8928BD2C57880D001006AF /* WatchListCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListCollection.swift; sourceTree = "<group>"; };
 		BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		BCE471352C4FAB2F00FE52EB /* CustomSegmentedControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControll.swift; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 				BC2B28882C454A4A00329A3C /* WatchList+Presenter.swift */,
 				BC2B288A2C454A5500329A3C /* WatchList+View.swift */,
 				BC2B288C2C454A5F00329A3C /* WatchListView.swift */,
+				BC8928B92C57841B001006AF /* Collection */,
+				BC8928BA2C578421001006AF /* Cell */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -352,6 +358,22 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		BC8928B92C57841B001006AF /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				BC8928BD2C57880D001006AF /* WatchListCollection.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		BC8928BA2C578421001006AF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BC8928BB2C57845A001006AF /* WatchListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		BCE4713D2C53A36B00FE52EB /* Collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +473,7 @@
 				BC2B28C72C490AF600329A3C /* UILable+Extensions.swift in Sources */,
 				BCE471382C51181100FE52EB /* ReviewsCell.swift in Sources */,
 				BC2B28D82C491FA800329A3C /* TopFilmsCollectionView.swift in Sources */,
+				BC8928BE2C57880D001006AF /* WatchListCollection.swift in Sources */,
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
 				BCE471452C53B3AD00FE52EB /* ReviewModel.swift in Sources */,
@@ -472,6 +495,7 @@
 				BC2B28D42C49194000329A3C /* UITextField+Extensions.swift in Sources */,
 				BC2B28F82C4A7ECF00329A3C /* Detail+Presenter.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,
+				BC8928BC2C57845A001006AF /* WatchListCell.swift in Sources */,
 				BC2B28E12C4924CF00329A3C /* NetworkManager.swift in Sources */,
 				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,
 				BC2B28C92C490BAE00329A3C /* UIFont+Extensions.swift in Sources */,
