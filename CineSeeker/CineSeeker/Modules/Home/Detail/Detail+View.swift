@@ -8,6 +8,8 @@ extension Detail {
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
+        private var isBookmarked = false
+        
         // MARK: - Subviews -
         
         private let mainScrollView: UIScrollView = .init()
@@ -68,7 +70,6 @@ extension Detail {
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
-            configureNavigation()
             customSegmentedControl.delegate = self
             change(to: 0)
         }
@@ -86,28 +87,7 @@ extension Detail {
             layoutSubviews()
             setupActions()
         }
-        
-        private func configureNavigation() {
-            let navBar = navigationController?.navigationBar
-            navBar?.isTranslucent = false
-            navBar?.tintColor = .white
-            navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationItem.hidesBackButton = true
-            
-            if #available(iOS 15.0, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = .Colors.Font.darkGray
-                appearance.shadowColor = .clear
-                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
                 
-                navBar?.standardAppearance = appearance
-                navBar?.scrollEdgeAppearance = appearance
-            } else {
-                navBar?.barTintColor = .Colors.Font.darkGray
-            }
-        }
-        
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
             
@@ -116,6 +96,7 @@ extension Detail {
             
             contentView.addView(posterFilmImageView)
             contentView.addView(nameMovieLabel)
+            
             posterFilmImageView.addView(blurView)
             blurView.contentView.addView(star)
             blurView.contentView.addView(ratingLabel)
@@ -144,6 +125,14 @@ extension Detail {
         private func configureSubviews() {
             
             mainScrollView.showsVerticalScrollIndicator = false
+            
+            configureNavigationBar(
+                withTitle: "Detail",
+                backgroundColor: .Colors.Font.darkGray,
+                titleColor: .white,
+                rightBarButtonImage: UIImage(systemName: "bookmark"),
+                rightBarButtonAction: #selector(bookmarkTapped)
+            )
             
             posterFilmImageView.image = presenter.image
             
@@ -312,6 +301,14 @@ extension Detail {
         }
         
         private func setupActions() { }
+        
+        @objc 
+        private func bookmarkTapped() {
+            isBookmarked.toggle()
+            
+            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
+        }
     }
 }
 

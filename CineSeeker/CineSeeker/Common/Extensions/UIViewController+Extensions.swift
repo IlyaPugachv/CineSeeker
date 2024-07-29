@@ -51,3 +51,34 @@ extension UIViewController: ViewDelegate {
         view.endEditing(true)
     }
 }
+
+extension UIViewController {
+    
+    func configureNavigationBar(withTitle title: String, backgroundColor: UIColor, titleColor: UIColor, rightBarButtonImage: UIImage?, rightBarButtonAction: Selector?) {
+        let navBar = navigationController?.navigationBar
+        navBar?.isTranslucent = false
+        navBar?.tintColor = titleColor
+        navBar?.titleTextAttributes = [.foregroundColor: titleColor]
+        navigationItem.hidesBackButton = true
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = backgroundColor
+            appearance.shadowColor = .clear
+            appearance.titleTextAttributes = [.foregroundColor: titleColor]
+            
+            navBar?.standardAppearance = appearance
+            navBar?.scrollEdgeAppearance = appearance
+        } else {
+            navBar?.barTintColor = backgroundColor
+        }
+        
+        if let rightImage = rightBarButtonImage, let action = rightBarButtonAction {
+            let rightButtonItem = UIBarButtonItem(image: rightImage, style: .plain, target: self, action: action)
+            navigationItem.rightBarButtonItem = rightButtonItem
+        }
+        
+        self.title = title
+    }
+}

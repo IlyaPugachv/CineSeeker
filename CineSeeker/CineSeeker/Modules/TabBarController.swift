@@ -15,6 +15,7 @@ final class TabBarController: UITabBarController {
         
         searchVC.title = "Search"
         
+        
         homeVC.tabBarItem = UITabBarItem(title: .Localization.home, image: UIImage(systemName: "house"), tag: 0)
         searchVC.tabBarItem = UITabBarItem(title: .Localization.search, image: UIImage(systemName: "magnifyingglass"), tag: 1)
         watchListVC.tabBarItem = UITabBarItem(title: .Localization.watchList, image: UIImage(systemName: "bookmark"), tag: 2)
