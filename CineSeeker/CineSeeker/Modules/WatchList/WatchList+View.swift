@@ -56,7 +56,7 @@ extension WatchList {
             watchListCollection.delegate = self
             watchListCollection.dataSource = self
         }
-        
+    
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
                 watchListCollection.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
