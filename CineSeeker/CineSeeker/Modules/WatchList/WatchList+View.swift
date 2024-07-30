@@ -10,7 +10,7 @@ extension WatchList {
         
         // MARK: - Subviews -
        
-       private let watchListCollection = WatchListCollection()
+        private let watchListCollection = WatchListCollection()
         
         // MARK: - Initializers -
         
@@ -52,27 +52,20 @@ extension WatchList {
             view.backgroundColor = .Colors.Font.darkGray
             
             view.addView(watchListCollection)
-            
         }
         
         private func configureSubviews() {
-            
             watchListCollection.delegate = self
             watchListCollection.dataSource = self
-           
         }
         
         private func layoutSubviews() {
-            
             NSLayoutConstraint.activate([
-            
-            watchListCollection.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            watchListCollection.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            watchListCollection.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            watchListCollection.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-
+                watchListCollection.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+                watchListCollection.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                watchListCollection.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                watchListCollection.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
             ])
-
         }
         
         private func setupActions() { }
@@ -84,7 +77,7 @@ extension WatchList {
 extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        BookmarkManager.shared.getBookmarkedMovies().count
+        return BookmarkManager.shared.getBookmarkedMovies().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -103,6 +96,19 @@ extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionV
         }
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performPrimaryActionForItemAt indexPath: IndexPath) {
+      
+        var bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
+        let movieToDelete = bookmarkedMovies[indexPath.row]
+        BookmarkManager.shared.removeBookmark(movieTitle: movieToDelete.title)
+        
+        collectionView.deleteItems(at: [indexPath])
     }
 }
 
