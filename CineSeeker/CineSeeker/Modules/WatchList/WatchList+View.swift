@@ -45,12 +45,10 @@ extension WatchList {
             buildHierarchy()
             configureSubviews()
             layoutSubviews()
-            setupActions()
         }
         
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
-            
             view.addView(watchListCollection)
         }
         
@@ -68,7 +66,69 @@ extension WatchList {
             ])
         }
         
-        private func setupActions() { }
+        @objc 
+        private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+            
+            guard let cell = gesture.view as? UICollectionViewCell else { return }
+            guard let indexPath = watchListCollection.indexPath(for: cell) else { return }
+            
+            let translation = gesture.translation(in: cell)
+            
+            switch gesture.state {
+                
+            case .changed:
+                if translation.x < 0 {
+                    cell.transform = CGAffineTransform(translationX: translation.x, y: 0)
+                }
+                
+            case .ended:
+              
+                let screenWidth = UIScreen.main.bounds.width
+                if abs(translation.x) > screenWidth / 2 {
+                    
+                    showConfirmationAlert(
+                        title: "Confirm Deletion",
+                        message: "Are you sure you want to delete this item?",
+                        yesButtonTitle: "Yes",
+                        noButtonTitle: "No",
+                        yesCompletion: {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                cell.transform = CGAffineTransform(translationX: -screenWidth, y: 0)
+                            }) { _ in
+                                self.handleSwipeToDelete(for: indexPath)
+                            }
+                        },
+                        
+                        noCompletion: {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                cell.transform = .identity
+                            })
+                        }
+                    )
+                } else {
+                  
+                    UIView.animate(withDuration: 0.3, animations: {
+                        cell.transform = .identity
+                    })
+                }
+                
+            default:
+                break
+            }
+        }
+        
+        private func handleSwipeToDelete(for indexPath: IndexPath) {
+           
+            let bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
+            let movieToDelete = bookmarkedMovies[indexPath.row]
+            
+            BookmarkManager.shared.removeBookmark(
+                movieTitle: movieToDelete.title)
+            
+            watchListCollection.performBatchUpdates({
+                watchListCollection.deleteItems(at: [indexPath])
+            }, completion: nil)
+        }
     }
 }
 
@@ -77,11 +137,14 @@ extension WatchList {
 extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return BookmarkManager.shared.getBookmarkedMovies().count
+        BookmarkManager.shared.getBookmarkedMovies().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchListCell.reuseId, for: indexPath) as! WatchListCell
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: WatchListCell.reuseId,
+            for: indexPath) as! WatchListCell
         
         let bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
         let movie = bookmarkedMovies[indexPath.row]
@@ -95,20 +158,10 @@ extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionV
             cell.profileImageView.image = UIImage(data: imageData)
         }
 
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        cell.addGestureRecognizer(panGesture)
+
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, performPrimaryActionForItemAt indexPath: IndexPath) {
-      
-        var bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
-        let movieToDelete = bookmarkedMovies[indexPath.row]
-        BookmarkManager.shared.removeBookmark(movieTitle: movieToDelete.title)
-        
-        collectionView.deleteItems(at: [indexPath])
     }
 }
 
