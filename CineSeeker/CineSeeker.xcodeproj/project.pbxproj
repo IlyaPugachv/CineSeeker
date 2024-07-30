@@ -258,13 +258,12 @@
 		BC2B28702C45467000329A3C /* WatchList */ = {
 			isa = PBXGroup;
 			children = (
-				BCF4A0852C57A90100F9240D /* BookmarkedMovie.swift */,
 				BC2B28882C454A4A00329A3C /* WatchList+Presenter.swift */,
 				BC2B288A2C454A5500329A3C /* WatchList+View.swift */,
 				BC2B288C2C454A5F00329A3C /* WatchListView.swift */,
+				BCEFC2522C59207200666979 /* Components */,
 				BC8928B92C57841B001006AF /* Collection */,
 				BC8928BA2C578421001006AF /* Cell */,
-				BCF4A0872C57A93A00F9240D /* BookmarkManager.swift */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -352,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				BC2B28E02C4924CF00329A3C /* NetworkManager.swift */,
+				BCF4A0872C57A93A00F9240D /* BookmarkManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -389,6 +389,14 @@
 				BCE471392C511FF900FE52EB /* ReviewsCollectionView.swift */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		BCEFC2522C59207200666979 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BCF4A0852C57A90100F9240D /* BookmarkedMovie.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

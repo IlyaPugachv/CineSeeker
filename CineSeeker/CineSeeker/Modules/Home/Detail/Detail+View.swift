@@ -71,6 +71,7 @@ extension Detail {
             super.viewDidLoad()
             setup()
             customSegmentedControl.delegate = self
+            checkIfBookmarked()
             change(to: 0)
         }
         
@@ -130,7 +131,7 @@ extension Detail {
                 withTitle: "Detail",
                 backgroundColor: .Colors.Font.darkGray,
                 titleColor: .white,
-                rightBarButtonImage: UIImage(systemName: "bookmark"),
+                rightBarButtonImage: UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark"),
                 rightBarButtonAction: #selector(bookmarkTapped)
             )
             
@@ -322,6 +323,12 @@ extension Detail {
                 BookmarkManager.shared.removeBookmark(movieTitle: presenter.title)
             }
         }
+        
+        private func checkIfBookmarked() {
+            isBookmarked = BookmarkManager.shared.isBookmarked(movieTitle: presenter.title)
+            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
+        }
     }
 }
 
@@ -357,7 +364,7 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     
     // MARK: - UICollectionViewDataSource Methods -
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 5 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 10 }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -376,8 +383,8 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     // MARK: - UICollectionViewDelegateFlowLayout Methods -
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width - 16 // Adjust width as needed
-        let height: CGFloat = 150 // Adjust height as needed
+        let width = collectionView.frame.width - 16
+        let height: CGFloat = 150
         return CGSize(width: width, height: height)
     }
 }
