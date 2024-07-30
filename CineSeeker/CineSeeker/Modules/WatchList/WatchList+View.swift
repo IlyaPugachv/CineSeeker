@@ -66,6 +66,8 @@ extension WatchList {
             ])
         }
         
+        
+        
         @objc 
         private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
             
