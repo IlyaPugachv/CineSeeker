@@ -6,8 +6,12 @@ extension Home {
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
+        private let mainScrollView: UIScrollView = .init()
+        private let contentView: UIView = .init()
+        
         private let topLabel: UILabel = .init()
         private let searchTextField: UITextField = .init()
+        
         private let topFilmsCollectionView = TopFilmsCollectionView()
         private let customSegmentedControl = CustomSegmentedControl()
         private let fullListFilmsCollection = FullListFilmsCollection()
@@ -51,11 +55,15 @@ extension Home {
         
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
-            view.addView(topLabel)
-            view.addView(searchTextField)
-            view.addView(topFilmsCollectionView)
-            view.addView(customSegmentedControl)
-            view.addView(fullListFilmsCollection)
+            
+            view.addView(mainScrollView)
+            mainScrollView.addView(contentView)
+            
+            contentView.addView(topLabel)
+            contentView.addView(searchTextField)
+            contentView.addView(topFilmsCollectionView)
+            contentView.addView(customSegmentedControl)
+            contentView.addView(fullListFilmsCollection)
         }
         
         private func configureSubviews() {
@@ -82,31 +90,45 @@ extension Home {
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
-                topLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
-                topLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                
+                mainScrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                mainScrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                mainScrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                mainScrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+                
+                contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
+                contentView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
+                contentView.trailingAnchor.constraint(equalTo: mainScrollView.trailingAnchor),
+                contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),
+                contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor),
+                
+                topLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+                topLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
                 
                 searchTextField.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 20),
                 searchTextField.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
-                searchTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                searchTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
                 searchTextField.widthAnchor.constraint(equalToConstant: 327),
                 searchTextField.heightAnchor.constraint(equalToConstant: 42),
                 
                 topFilmsCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 30),
                 topFilmsCollectionView.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
-                topFilmsCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                topFilmsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 topFilmsCollectionView.heightAnchor.constraint(equalToConstant: 210),
                 topFilmsCollectionView.widthAnchor.constraint(equalToConstant: 144),
                 
                 customSegmentedControl.topAnchor.constraint(equalTo: topFilmsCollectionView.bottomAnchor, constant: 50),
                 customSegmentedControl.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
-                customSegmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                customSegmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 customSegmentedControl.heightAnchor.constraint(equalToConstant: 20),
                 
                 fullListFilmsCollection.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 30),
                 fullListFilmsCollection.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
-                fullListFilmsCollection.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-                fullListFilmsCollection.heightAnchor.constraint(equalToConstant: 220),
+                fullListFilmsCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                fullListFilmsCollection.heightAnchor.constraint(equalToConstant: 245),
                 fullListFilmsCollection.widthAnchor.constraint(equalToConstant: 100),
+                
+                fullListFilmsCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             ])
         }
         
