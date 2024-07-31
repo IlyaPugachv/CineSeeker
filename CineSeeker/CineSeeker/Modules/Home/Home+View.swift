@@ -9,6 +9,7 @@ extension Home {
         private let topLabel: UILabel = .init()
         private let searchTextField: UITextField = .init()
         private let topFilmsCollectionView = TopFilmsCollectionView()
+        private let customSegmentedControl = CustomSegmentedControl()
         
         var movies: [MovieRandom] = []
         
@@ -48,6 +49,7 @@ extension Home {
             view.addView(topLabel)
             view.addView(searchTextField)
             view.addView(topFilmsCollectionView)
+            view.addView(customSegmentedControl)
         }
         
         private func configureSubviews() {
@@ -67,6 +69,8 @@ extension Home {
                 cornerRadius: 12
             )
             
+            customSegmentedControl.buttonTitles = ["Now playing", "Upcoming", "Top rated", "Popular"]
+
             hideKeyboardWhenTappedAround()
         }
         
@@ -85,7 +89,12 @@ extension Home {
                 topFilmsCollectionView.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
                 topFilmsCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
                 topFilmsCollectionView.heightAnchor.constraint(equalToConstant: 210),
-                topFilmsCollectionView.widthAnchor.constraint(equalToConstant: 144)
+                topFilmsCollectionView.widthAnchor.constraint(equalToConstant: 144),
+                
+                customSegmentedControl.topAnchor.constraint(equalTo: topFilmsCollectionView.bottomAnchor, constant: 50),
+                customSegmentedControl.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
+                customSegmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                customSegmentedControl.heightAnchor.constraint(equalToConstant: 20),
             ])
         }
         
@@ -111,7 +120,8 @@ extension Home {
 
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { movies.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 
+        movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,5 +170,4 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
             }
         }
     }
-
 }
