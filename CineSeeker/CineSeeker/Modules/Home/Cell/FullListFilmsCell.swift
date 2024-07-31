@@ -32,11 +32,11 @@ final class FullListFilmsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    func configure(with movie: MovieRandom) {
-    //
-    //        if let posterUrlString = movie.poster?.url, let posterUrl = URL(string: posterUrlString) {
-    //            posterImageView.kf.setImage(with: posterUrl)
-    //        }
-    //    }
+        func configure(with movie: MovieRandom) {
+    
+            if let posterUrlString = movie.poster?.url, let posterUrl = URL(string: posterUrlString) {
+                posterImageView.kf.setImage(with: posterUrl)
+            }
+        }
 }
 

@@ -12,7 +12,8 @@ extension Home {
         private let customSegmentedControl = CustomSegmentedControl()
         private let fullListFilmsCollection = FullListFilmsCollection()
         
-        var movies: [MovieRandom] = []
+        var topMovies: [MovieRandom] = []
+        var bestMovies: [MovieRandom] = []
         
         var review: [ReviewModel] = []
         
@@ -116,10 +117,24 @@ extension Home {
                 switch result {
                 case .success(let results):
                     if let docs = results.docs {
-                        self.movies = docs
+                        self.topMovies = docs
                     }
                     DispatchQueue.main.async {
                         self.topFilmsCollectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print("Ошибка при загрузке данных: \(error.localizedDescription)")
+                }
+            }
+            
+            NetworkManager.fetchBestMovieOfAllTime { result in
+                switch result {
+                case .success(let results):
+                    if let docs = results.docs {
+                        self.bestMovies = docs
+                    }
+                    DispatchQueue.main.async {
+                        self.fullListFilmsCollection.reloadData()
                     }
                 case .failure(let error):
                     print("Ошибка при загрузке данных: \(error.localizedDescription)")
@@ -144,9 +159,9 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
         if collectionView == topFilmsCollectionView {
-            return movies.count
+            return topMovies.count
         } else if collectionView == fullListFilmsCollection {
-            return 10
+            return bestMovies.count
         }
         return 0
     }
@@ -156,15 +171,15 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else {
                 fatalError("Unable to dequeue TopFilmsCell")
             }
-            let movie = movies[indexPath.item]
+            let movie = topMovies[indexPath.item]
             cell.configure(with: movie)
             return cell
         } else if collectionView == fullListFilmsCollection {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullListFilmsCell.reuseId, for: indexPath) as? FullListFilmsCell else {
                 fatalError("Unable to dequeue FullListFilmsCell")
             }
-//            let movie = movies[indexPath.item]
-//            cell.configure(with: movie)
+            let movie = bestMovies[indexPath.item]
+            cell.configure(with: movie)
             return cell
         }
 
@@ -178,7 +193,7 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
                 return
             }
             
-            let movie = movies[indexPath.item]
+            let movie = topMovies[indexPath.item]
             
             NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
                 switch result {
