@@ -2,14 +2,14 @@ import UIKit
 
 extension WatchList {
     class View: UIViewController {
-
+        
         // MARK: - Properties -
         
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
         // MARK: - Subviews -
-       
+        
         private let watchListCollection = WatchListCollection()
         
         // MARK: - Initializers -
@@ -56,7 +56,7 @@ extension WatchList {
             watchListCollection.delegate = self
             watchListCollection.dataSource = self
         }
-    
+        
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
                 watchListCollection.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
@@ -68,7 +68,7 @@ extension WatchList {
         
         
         
-        @objc 
+        @objc
         private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
             
             guard let cell = gesture.view as? UICollectionViewCell else { return }
@@ -84,7 +84,7 @@ extension WatchList {
                 }
                 
             case .ended:
-              
+                
                 let screenWidth = UIScreen.main.bounds.width
                 if abs(translation.x) > screenWidth / 2 {
                     
@@ -108,7 +108,7 @@ extension WatchList {
                         }
                     )
                 } else {
-                  
+                    
                     UIView.animate(withDuration: 0.3, animations: {
                         cell.transform = .identity
                     })
@@ -120,7 +120,7 @@ extension WatchList {
         }
         
         private func handleSwipeToDelete(for indexPath: IndexPath) {
-           
+            
             let bookmarkedMovies = BookmarkManager.shared.getBookmarkedMovies()
             let movieToDelete = bookmarkedMovies[indexPath.row]
             
@@ -159,10 +159,10 @@ extension WatchList.View: WatchListView, UICollectionViewDelegate, UICollectionV
         if let imageData = movie.posterImageData {
             cell.profileImageView.image = UIImage(data: imageData)
         }
-
+        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         cell.addGestureRecognizer(panGesture)
-
+        
         return cell
     }
 }

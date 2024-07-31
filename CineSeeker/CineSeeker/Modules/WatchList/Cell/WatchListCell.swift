@@ -95,10 +95,6 @@ final class WatchListCell: UICollectionViewCell {
             genreLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),
             releaseDateLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 5),
             movieLengthLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 5)
-            
-            
-            
-            
         ])
     }
 }

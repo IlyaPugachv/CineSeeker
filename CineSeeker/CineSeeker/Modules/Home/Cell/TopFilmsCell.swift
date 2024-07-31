@@ -6,7 +6,7 @@ final class TopFilmsCell: UICollectionViewCell {
     
     static let reuseId = "TopFilmsCell"
     
-     let posterImageView: UIImageView = {
+    let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -14,16 +14,27 @@ final class TopFilmsCell: UICollectionViewCell {
         return imageView
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.hidesWhenStopped = true
+        indicator.color = .white
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         contentView.addView(posterImageView)
-        
+        contentView.addView(activityIndicator)
+
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     
@@ -33,8 +44,10 @@ final class TopFilmsCell: UICollectionViewCell {
     
     func configure(with movie: MovieRandom) {
         
-        if let posterUrlString = movie.poster?.url, let posterUrl = URL(string: posterUrlString) {
-            posterImageView.kf.setImage(with: posterUrl)
-        }
+        ImageLoader.loadImage(
+            into: posterImageView,
+            from: movie.poster?.url, 
+            placeholder: UIImage(named: "photoUser"),
+            activityIndicator: activityIndicator)
     }
 }
