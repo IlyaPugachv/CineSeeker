@@ -10,6 +10,7 @@ extension Home {
         private let searchTextField: UITextField = .init()
         private let topFilmsCollectionView = TopFilmsCollectionView()
         private let customSegmentedControl = CustomSegmentedControl()
+        private let fullListFilmsCollection = FullListFilmsCollection()
         
         var movies: [MovieRandom] = []
         
@@ -33,6 +34,9 @@ extension Home {
             topFilmsCollectionView.dataSource = self
             topFilmsCollectionView.delegate = self
             
+            fullListFilmsCollection.dataSource = self
+            fullListFilmsCollection.delegate = self
+            
             fetchMovies()
             setup()
         }
@@ -50,6 +54,7 @@ extension Home {
             view.addView(searchTextField)
             view.addView(topFilmsCollectionView)
             view.addView(customSegmentedControl)
+            view.addView(fullListFilmsCollection)
         }
         
         private func configureSubviews() {
@@ -95,6 +100,12 @@ extension Home {
                 customSegmentedControl.leadingAnchor.constraint(equalTo: topLabel.leadingAnchor),
                 customSegmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
                 customSegmentedControl.heightAnchor.constraint(equalToConstant: 20),
+                
+                fullListFilmsCollection.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 30),
+                fullListFilmsCollection.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
+                fullListFilmsCollection.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                fullListFilmsCollection.heightAnchor.constraint(equalToConstant: 220),
+                fullListFilmsCollection.widthAnchor.constraint(equalToConstant: 100),
             ])
         }
         
@@ -119,55 +130,82 @@ extension Home {
 }
 
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 
-        movies.count
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        if collectionView == topFilmsCollectionView {
+            return 1
+        } else if collectionView == fullListFilmsCollection {
+            return 3
+        }
+        return 0
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      
+        if collectionView == topFilmsCollectionView {
+            return movies.count
+        } else if collectionView == fullListFilmsCollection {
+            return 10
+        }
+        return 0
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else {
-            fatalError("Unable to dequeue TopFilmsCell")
-        }
-        
-        let movie = movies[indexPath.item]
-        cell.configure(with: movie)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TopFilmsCell,
-              let image = cell.posterImageView.image else {
-            return
-        }
-        
-        let movie = movies[indexPath.item]
-        
-        NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
-            switch result {
-            case .success(let reviewModel):
-                let reviews = reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
-                
-                let author = reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
-                
-                let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
-                
-                DispatchQueue.main.async {
-                    self.presenter.showFilmDetail(
-                        imageMovie: image,
-                        nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
-                        rating: movie.rating?.imdb ?? 0.0,
-                        year: movie.year ?? 2024,
-                        movieLength: movie.movieLength ?? 100,
-                        genres: genres,
-                        aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription, 
-                        autor: author,
-                        review: reviews
-                    )
-                }
-            case .failure(let error):
-                print("Error fetching reviews: \(error.localizedDescription)")
+        if collectionView == topFilmsCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else {
+                fatalError("Unable to dequeue TopFilmsCell")
             }
+            let movie = movies[indexPath.item]
+            cell.configure(with: movie)
+            return cell
+        } else if collectionView == fullListFilmsCollection {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullListFilmsCell.reuseId, for: indexPath) as? FullListFilmsCell else {
+                fatalError("Unable to dequeue FullListFilmsCell")
+            }
+//            let movie = movies[indexPath.item]
+//            cell.configure(with: movie)
+            return cell
+        }
+
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == topFilmsCollectionView {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? TopFilmsCell,
+                  let image = cell.posterImageView.image else {
+                return
+            }
+            
+            let movie = movies[indexPath.item]
+            
+            NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
+                switch result {
+                case .success(let reviewModel):
+                    let reviews = reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
+                    let author = reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
+                    let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+                    
+                    DispatchQueue.main.async {
+                        self.presenter.showFilmDetail(
+                            imageMovie: image,
+                            nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+                            rating: movie.rating?.imdb ?? 0.0,
+                            year: movie.year ?? 2024,
+                            movieLength: movie.movieLength ?? 100,
+                            genres: genres,
+                            aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription,
+                            autor: author,
+                            review: reviews
+                        )
+                    }
+                case .failure(let error):
+                    print("Error fetching reviews: \(error.localizedDescription)")
+                }
+            }
+        } else if collectionView == fullListFilmsCollection {
+           
         }
     }
 }
