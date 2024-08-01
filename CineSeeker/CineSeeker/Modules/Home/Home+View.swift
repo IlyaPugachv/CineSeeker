@@ -12,6 +12,12 @@ extension Home {
         private let topLabel: UILabel = .init()
         private let searchTextField: UITextField = .init()
         
+        private var selectedSegmentIndex: Int = 0 {
+                   didSet {
+                       updateCollectionData(for: selectedSegmentIndex)
+                   }
+               }
+  
         private let topFilmsCollectionView = TopFilmsCollectionView()
         private let customSegmentedControl = CustomSegmentedControl()
         private let fullListFilmsCollection = FullListFilmsCollection()
@@ -42,7 +48,7 @@ extension Home {
             fullListFilmsCollection.dataSource = self
             fullListFilmsCollection.delegate = self
             
-            fetchMovies()
+            fetchAllMovies()
             setup()
         }
         
@@ -84,6 +90,7 @@ extension Home {
             )
             
             customSegmentedControl.buttonTitles = ["Now playing", "Upcoming", "Top rated", "Popular"]
+            customSegmentedControl.delegate = self
 
             hideKeyboardWhenTappedAround()
         }
@@ -134,8 +141,28 @@ extension Home {
         
         private func setupActions() {  }
         
-        private func fetchMovies() {
-            NetworkManager.getCollectionsFilms { result in
+        private func updateCollectionData(for index: Int) {
+            switch index {
+            case 0:
+                fetchNowPlayingMovies()
+            case 1:
+                fetchUpcomingMovies()
+            case 2:
+                fetchTopRatedMovies()
+            case 3:
+                fetchPopularMovies()
+            default:
+                break
+            }
+        }
+        
+        private func fetchAllMovies() {
+            fetchPopularMovies()
+            fetchUpcomingMovies()
+            fetchTopRatedMovies()
+            fetchNowPlayingMovies()
+            
+            NetworkManager.fetchRandomMovies { result in
                 switch result {
                 case .success(let results):
                     if let docs = results.docs {
@@ -148,26 +175,74 @@ extension Home {
                     print("Ошибка при загрузке данных: \(error.localizedDescription)")
                 }
             }
-            
-            NetworkManager.fetchBestMovieOfAllTime { result in
+        }
+        
+        private func fetchNowPlayingMovies() {
+            NetworkManager.fetchPopularMovies { result in
                 switch result {
                 case .success(let results):
-                    if let docs = results.docs {
-                        self.bestMovies = docs
-                    }
+                    self.bestMovies = results.docs ?? []
                     DispatchQueue.main.async {
                         self.fullListFilmsCollection.reloadData()
                     }
                 case .failure(let error):
-                    print("Ошибка при загрузке данных: \(error.localizedDescription)")
+                    print("Error fetching now playing movies: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        private func fetchUpcomingMovies() {
+            NetworkManager.fetchUpcomingMovies { result in
+                switch result {
+                case .success(let results):
+                    self.bestMovies = results.docs ?? []
+                    DispatchQueue.main.async {
+                        self.fullListFilmsCollection.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error fetching upcoming movies: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        private func fetchTopRatedMovies() {
+            NetworkManager.fetchTopRatedMovies { result in
+                switch result {
+                case .success(let results):
+                    self.bestMovies = results.docs ?? []
+                    DispatchQueue.main.async {
+                        self.fullListFilmsCollection.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error fetching top rated movies: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        private func fetchPopularMovies() {
+            NetworkManager.fetchNowPlayingMovies { result in
+                switch result {
+                case .success(let results):
+                    self.bestMovies = results.docs ?? []
+                    DispatchQueue.main.async {
+                        self.fullListFilmsCollection.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error fetching popular movies: \(error.localizedDescription)")
                 }
             }
         }
     }
 }
 
-extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
+extension Home.View: CustomSegmentedControlDelegate {
+    func change(to index: Int) {
+        selectedSegmentIndex = index
+    }
+}
 
+extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         if collectionView == topFilmsCollectionView {
