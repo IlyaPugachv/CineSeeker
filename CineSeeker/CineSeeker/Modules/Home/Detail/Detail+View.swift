@@ -128,7 +128,7 @@ extension Detail {
             mainScrollView.showsVerticalScrollIndicator = false
             
             configureNavigationBar(
-                withTitle: "Detail",
+                withTitle: .Localization.detail,
                 backgroundColor: .Colors.Font.darkGray,
                 titleColor: .white,
                 rightBarButtonImage: UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark"),

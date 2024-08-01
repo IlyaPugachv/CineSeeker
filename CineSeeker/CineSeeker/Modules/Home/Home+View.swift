@@ -3,8 +3,12 @@ import UIKit
 extension Home {
     class View: UIViewController {
         
+        // MARK: - Properties -
+        
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
+        
+        // MARK: - Subviews -
         
         private let mainScrollView: UIScrollView = .init()
         private let contentView: UIView = .init()
@@ -27,6 +31,8 @@ extension Home {
         
         var review: [ReviewModel] = []
         
+        // MARK: - Initializers -
+        
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
@@ -39,6 +45,8 @@ extension Home {
         
         deinit { }
         
+        // MARK: - Lifecycle -
+        
         public override func viewDidLoad() {
             super.viewDidLoad()
             
@@ -48,9 +56,15 @@ extension Home {
             fullListFilmsCollection.dataSource = self
             fullListFilmsCollection.delegate = self
             
+            selectedSegmentIndex = 0
+            
             fetchAllMovies()
+            fetchNowPlayingMovies()
+            
             setup()
         }
+        
+        // MARK: - Methods -
         
         private func setup() {
             buildHierarchy()
@@ -157,11 +171,6 @@ extension Home {
         }
         
         private func fetchAllMovies() {
-            fetchPopularMovies()
-            fetchUpcomingMovies()
-            fetchTopRatedMovies()
-            fetchNowPlayingMovies()
-            
             NetworkManager.fetchRandomMovies { result in
                 switch result {
                 case .success(let results):

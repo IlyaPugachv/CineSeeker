@@ -3,7 +3,7 @@ import Foundation
 extension String {
     struct Localization {
         
-        //MARK: - Auxiliary -
+        //MARK: - AUXILIARY -
         static var minutes: String { localise("minutes")}
         
         //MARK: - ERROR -
@@ -15,10 +15,11 @@ extension String {
         static var search: String { localise("search") }
         static var watchList: String { localise("watchList") }
         static var whatDoYouWanToWatch: String { localise("whatDoYouWanToWatch") }
-
+        
+        //MARK: - DETAIL CELL-
+        static var detail: String { localise("detail") }
     }
 }
-
 
 public func localise(_ key: String) -> String {
     let value = NSLocalizedString(key, comment: "")
@@ -26,7 +27,6 @@ public func localise(_ key: String) -> String {
         return value
     }
 
-    // Fall back to en
     guard
         let path = Bundle.main.path(forResource: "en", ofType: "lproj"),
         let bundle = Bundle(path: path)
