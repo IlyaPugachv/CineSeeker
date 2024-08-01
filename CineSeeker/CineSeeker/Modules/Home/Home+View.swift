@@ -103,7 +103,14 @@ extension Home {
                 cornerRadius: 12
             )
             
-            customSegmentedControl.buttonTitles = ["Now playing", "Upcoming", "Top rated", "Popular"]
+            customSegmentedControl.buttonTitles = [
+                
+                "\(String.Localization.nowPlaying)",
+                "\(String.Localization.upComing)",
+                "\(String.Localization.topRated)",
+                "\(String.Localization.popular)"
+            ]
+            
             customSegmentedControl.delegate = self
 
             hideKeyboardWhenTappedAround()

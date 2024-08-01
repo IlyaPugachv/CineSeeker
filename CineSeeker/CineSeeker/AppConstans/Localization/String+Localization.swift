@@ -15,7 +15,11 @@ extension String {
         static var search: String { localise("search") }
         static var watchList: String { localise("watchList") }
         static var whatDoYouWanToWatch: String { localise("whatDoYouWanToWatch") }
-        
+        static var nowPlaying: String { localise("nowPlaying") }
+        static var upComing: String { localise("upComing") }
+        static var topRated: String { localise("topRated") }
+        static var popular: String { localise("popular") }
+          
         //MARK: - DETAIL CELL-
         static var detail: String { localise("detail") }
         

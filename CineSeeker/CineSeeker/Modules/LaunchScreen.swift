@@ -6,8 +6,11 @@ final class LaunchScreen: UIViewController {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.configureImage(named: "imageLaunchScreen")
         imageView.contentMode = .scaleAspectFit
+        
+        imageView.configureImage(
+            named: "imageLaunchScreen")
+        
         return imageView
     }()
     
@@ -21,7 +24,7 @@ final class LaunchScreen: UIViewController {
     // MARK: - Setup -
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.12, green: 0.14, blue: 0.18, alpha: 1.00)
+        view.backgroundColor = .Colors.Font.darkGray
         view.addView(logoImageView)
         setupConstraints()
     }
