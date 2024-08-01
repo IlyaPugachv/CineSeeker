@@ -10,7 +10,6 @@
 		BC2B28522C453F4000329A3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28512C453F4000329A3C /* AppDelegate.swift */; };
 		BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28532C453F4000329A3C /* SceneDelegate.swift */; };
 		BC2B285B2C453F4200329A3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2B285A2C453F4200329A3C /* Assets.xcassets */; };
-		BC2B285E2C453F4200329A3C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BC2B285D2C453F4200329A3C /* Base */; };
 		BC2B286C2C45448800329A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B286B2C45448800329A3C /* TabBarController.swift */; };
 		BC2B28722C45469E00329A3C /* Onboarding+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28712C45469E00329A3C /* Onboarding+Presenter.swift */; };
 		BC2B28742C4546B500329A3C /* Onboarding+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28732C4546B500329A3C /* Onboarding+View.swift */; };
@@ -49,6 +48,7 @@
 		BC77D11F2C57B4220055E39F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BC77D11E2C57B4220055E39F /* SDWebImageMapKit */; };
 		BC77D1222C57B4470055E39F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BC77D1212C57B4470055E39F /* Kingfisher */; };
 		BC7B8B792C5BA5C400ADA9DD /* NoMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B8B782C5BA5C400ADA9DD /* NoMovieView.swift */; };
+		BC7B8B7B2C5BB2B200ADA9DD /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B8B7A2C5BB2B200ADA9DD /* LaunchScreen.swift */; };
 		BC8928BC2C57845A001006AF /* WatchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8928BB2C57845A001006AF /* WatchListCell.swift */; };
 		BC8928BE2C57880D001006AF /* WatchListCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8928BD2C57880D001006AF /* WatchListCollection.swift */; };
 		BCE471322C4F9F7C00FE52EB /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */; };
@@ -88,7 +88,6 @@
 		BC2B28512C453F4000329A3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2B28532C453F4000329A3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BC2B285A2C453F4200329A3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BC2B285D2C453F4200329A3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC2B285F2C453F4200329A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC2B286B2C45448800329A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BC2B28712C45469E00329A3C /* Onboarding+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Onboarding+Presenter.swift"; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		BC2B28F92C4A7EE100329A3C /* Detail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+View.swift"; sourceTree = "<group>"; };
 		BC2B28FB2C4A7EEC00329A3C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BC7B8B782C5BA5C400ADA9DD /* NoMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMovieView.swift; sourceTree = "<group>"; };
+		BC7B8B7A2C5BB2B200ADA9DD /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		BC8928BB2C57845A001006AF /* WatchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListCell.swift; sourceTree = "<group>"; };
 		BC8928BD2C57880D001006AF /* WatchListCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListCollection.swift; sourceTree = "<group>"; };
 		BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -202,7 +202,6 @@
 			children = (
 				BC2B286A2C4541D400329A3C /* Themes */,
 				BC2B285A2C453F4200329A3C /* Assets.xcassets */,
-				BC2B285C2C453F4200329A3C /* LaunchScreen.storyboard */,
 			);
 			path = Resourse;
 			sourceTree = "<group>";
@@ -229,6 +228,7 @@
 		BC2B28692C45417C00329A3C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BC7B8B7A2C5BB2B200ADA9DD /* LaunchScreen.swift */,
 				BC2B286B2C45448800329A3C /* TabBarController.swift */,
 				BC2B286D2C45465300329A3C /* Onboarding */,
 				BC2B286E2C45465E00329A3C /* Home */,
@@ -508,7 +508,6 @@
 				BC2B28CF2C490D5C00329A3C /* inter-Medium.ttf in Resources */,
 				BC2B28D12C490D5C00329A3C /* inter-Regular.ttf in Resources */,
 				BC2B28C02C4905CA00329A3C /* Localizable.strings in Resources */,
-				BC2B285E2C453F4200329A3C /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +526,7 @@
 				BC2B28852C4549F500329A3C /* Search+View.swift in Sources */,
 				BC2B28832C4549EA00329A3C /* Search+Presenter.swift in Sources */,
 				BCE471452C53B3AD00FE52EB /* ReviewModel.swift in Sources */,
+				BC7B8B7B2C5BB2B200ADA9DD /* LaunchScreen.swift in Sources */,
 				BC2B287F2C4548BA00329A3C /* Home+View.swift in Sources */,
 				BC2B286C2C45448800329A3C /* TabBarController.swift in Sources */,
 				BCF4A0862C57A90100F9240D /* BookmarkedMovieModel.swift in Sources */,
@@ -572,14 +572,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BC2B285C2C453F4200329A3C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BC2B285D2C453F4200329A3C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		BC2B28BE2C4905CA00329A3C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
