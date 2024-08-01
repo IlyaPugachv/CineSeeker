@@ -310,7 +310,7 @@ extension Detail {
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
 
             if isBookmarked {
-                let movie = BookmarkedMovie()
+                let movie = BookmarkedMovieModel()
                 movie.title = presenter.title
                 movie.posterImageData = presenter.image?.pngData()
                 movie.rating = presenter.rating

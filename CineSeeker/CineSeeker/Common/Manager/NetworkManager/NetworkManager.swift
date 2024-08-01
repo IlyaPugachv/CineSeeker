@@ -7,7 +7,7 @@ final class NetworkManager {
     private init() {}
     
     static func fetchRandomMovies(completion: @escaping (Result<MovesAll, Error>) -> Void) {
-        let url = "\(APIConstans.request)v1.4/movie?page=1&limit=10"
+        let url = "\(APIConstans.request)v1.4/movie?page=1&limit=7"
         let headers: HTTPHeaders = [APIConstans.header : APIConstans.myAPI]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).response { response in

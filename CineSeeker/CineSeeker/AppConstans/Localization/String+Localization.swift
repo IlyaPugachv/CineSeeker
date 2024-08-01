@@ -18,6 +18,10 @@ extension String {
         
         //MARK: - DETAIL CELL-
         static var detail: String { localise("detail") }
+        
+        //MARK: - Watch List -
+        static var thereIsNoMovieYet: String { localise("thereIsNoMovieYet") }
+        static var findYourMovie: String { localise("findYourMovie") }
     }
 }
 

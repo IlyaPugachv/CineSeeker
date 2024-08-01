@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class BookmarkedMovie: Object {
+class BookmarkedMovieModel: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var title: String = ""
     @objc dynamic var posterImageData: Data? = nil
