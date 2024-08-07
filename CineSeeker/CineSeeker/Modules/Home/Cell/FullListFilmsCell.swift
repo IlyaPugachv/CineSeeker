@@ -2,15 +2,16 @@ import UIKit
 import SDWebImage
 import Kingfisher
 
-final class TopFilmsCell: UICollectionViewCell {
+final class FullListFilmsCell: UICollectionViewCell {
     
-    static let reuseId = "TopFilmsCell"
+    static let reuseId = "FullListFilmsCell"
     
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
+
         return imageView
     }()
     
@@ -26,7 +27,7 @@ final class TopFilmsCell: UICollectionViewCell {
         
         contentView.addView(posterImageView)
         contentView.addView(activityIndicator)
-
+        
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -43,11 +44,12 @@ final class TopFilmsCell: UICollectionViewCell {
     }
     
     func configure(with movie: MovieRandom) {
-        
+       
         ImageLoader.loadImage(
             into: posterImageView,
-            from: movie.poster?.url, 
+            from: movie.poster?.url,
             placeholder: UIImage(named: "photoUser"),
             activityIndicator: activityIndicator)
     }
 }
+

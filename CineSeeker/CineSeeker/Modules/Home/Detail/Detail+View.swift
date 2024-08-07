@@ -8,6 +8,8 @@ extension Detail {
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
+        private var isBookmarked = false
+        
         // MARK: - Subviews -
         
         private let mainScrollView: UIScrollView = .init()
@@ -68,8 +70,8 @@ extension Detail {
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
-            configureNavigation()
             customSegmentedControl.delegate = self
+            checkIfBookmarked()
             change(to: 0)
         }
         
@@ -86,28 +88,7 @@ extension Detail {
             layoutSubviews()
             setupActions()
         }
-        
-        private func configureNavigation() {
-            let navBar = navigationController?.navigationBar
-            navBar?.isTranslucent = false
-            navBar?.tintColor = .white
-            navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationItem.hidesBackButton = true
-            
-            if #available(iOS 15.0, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = .Colors.Font.darkGray
-                appearance.shadowColor = .clear
-                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
                 
-                navBar?.standardAppearance = appearance
-                navBar?.scrollEdgeAppearance = appearance
-            } else {
-                navBar?.barTintColor = .Colors.Font.darkGray
-            }
-        }
-        
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
             
@@ -116,6 +97,7 @@ extension Detail {
             
             contentView.addView(posterFilmImageView)
             contentView.addView(nameMovieLabel)
+            
             posterFilmImageView.addView(blurView)
             blurView.contentView.addView(star)
             blurView.contentView.addView(ratingLabel)
@@ -144,6 +126,14 @@ extension Detail {
         private func configureSubviews() {
             
             mainScrollView.showsVerticalScrollIndicator = false
+            
+            configureNavigationBar(
+                withTitle: .Localization.detail,
+                backgroundColor: .Colors.Font.darkGray,
+                titleColor: .white,
+                rightBarButtonImage: UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark"),
+                rightBarButtonAction: #selector(bookmarkTapped)
+            )
             
             posterFilmImageView.image = presenter.image
             
@@ -312,6 +302,33 @@ extension Detail {
         }
         
         private func setupActions() { }
+        
+        @objc
+        private func bookmarkTapped() {
+            isBookmarked.toggle()
+            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
+
+            if isBookmarked {
+                let movie = BookmarkedMovieModel()
+                movie.title = presenter.title
+                movie.posterImageData = presenter.image?.pngData()
+                movie.rating = presenter.rating
+                movie.genre = presenter.genres
+                movie.releaseDate = presenter.year
+                movie.movieLength = presenter.movieLength
+
+                BookmarkManager.shared.addBookmark(movie: movie)
+            } else {
+                BookmarkManager.shared.removeBookmark(movieTitle: presenter.title)
+            }
+        }
+        
+        private func checkIfBookmarked() {
+            isBookmarked = BookmarkManager.shared.isBookmarked(movieTitle: presenter.title)
+            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: bookmarkImageName)
+        }
     }
 }
 
@@ -347,7 +364,7 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     
     // MARK: - UICollectionViewDataSource Methods -
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 5 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 10 }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -366,8 +383,8 @@ extension Detail.View: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     // MARK: - UICollectionViewDelegateFlowLayout Methods -
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width - 16 // Adjust width as needed
-        let height: CGFloat = 150 // Adjust height as needed
+        let width = collectionView.frame.width - 16
+        let height: CGFloat = 150
         return CGSize(width: width, height: height)
     }
 }

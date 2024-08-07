@@ -39,7 +39,7 @@ class CustomSegmentedControl: UIView {
         let button = buttons[index]
         selectedIndex = index
         button.setTitleColor(selectorTextColor, for: .normal)
-        button.titleLabel?.font = UIFont.interSemibold(of: 14)
+        button.titleLabel?.font = UIFont.interMedium(of: 11)
         
         let selectorPosition = (frame.width / CGFloat(buttonTitles.count)) * CGFloat(index) + (frame.width / CGFloat(buttonTitles.count) - selectorWidth) / 2
         UIView.animate(withDuration: 0.2) {
@@ -51,7 +51,7 @@ class CustomSegmentedControl: UIView {
     func buttonAction(sender: UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(textColor, for: .normal)
-            btn.titleLabel?.font = UIFont.interRegular(of: 14)
+            btn.titleLabel?.font = UIFont.interMedium(of: 10)
             
             if btn == sender {
                 let selectorPosition = (frame.width / CGFloat(buttonTitles.count)) * CGFloat(buttonIndex) + (frame.width / CGFloat(buttonTitles.count) - selectorWidth) / 2
@@ -64,7 +64,7 @@ class CustomSegmentedControl: UIView {
                 ) { self.selectorView.frame.origin.x = selectorPosition }
                 
                 btn.setTitleColor(selectorTextColor, for: .normal)
-                btn.titleLabel?.font = UIFont.interMedium(of: 14)
+                btn.titleLabel?.font = UIFont.interMedium(of: 11)
             }
         }
     }
@@ -127,11 +127,10 @@ extension CustomSegmentedControl {
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action: #selector(CustomSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
-            button.titleLabel?.font = UIFont.interMedium(of: 12)
+            button.titleLabel?.font = UIFont.interMedium(of: 10)
             buttons.append(button)
         }
         buttons[0].setTitleColor(selectorTextColor, for: .normal)
-        buttons[0].titleLabel?.font = UIFont.interSemibold(of: 14)
+        buttons[0].titleLabel?.font = UIFont.interMedium(of: 11)
     }
 }
-
