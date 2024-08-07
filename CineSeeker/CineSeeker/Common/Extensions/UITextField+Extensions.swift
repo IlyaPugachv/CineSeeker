@@ -13,7 +13,8 @@ extension UITextField {
         textColor: UIColor = .black,
         cornerRadius: CGFloat = 8,
         padding: CGFloat = 10,
-        textAlignment: NSTextAlignment = .left
+        textAlignment: NSTextAlignment = .left,
+        leftViewPadding: CGFloat = 10
     ) {
         self.placeholder = placeholder
         self.font = font
@@ -26,12 +27,12 @@ extension UITextField {
         self.textColor = textColor
         
         if let icon = icon {
-            let iconView = UIImageView(frame: CGRect(x: 10, y: 5, width: 20, height: 20))
+            let iconView = UIImageView(frame: CGRect(x: leftViewPadding, y: 5, width: 20, height: 20))
             iconView.image = icon.withRenderingMode(.alwaysTemplate)
             iconView.tintColor = iconColor
             iconView.contentMode = .scaleAspectFit
             
-            let iconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            let iconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30 + leftViewPadding, height: 30))
             iconContainerView.addSubview(iconView)
             self.leftView = iconContainerView
         } else {
@@ -51,7 +52,7 @@ extension UITextField {
     func addClearButton() {
         let clearButton = UIButton(type: .custom)
         clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        clearButton.tintColor = .darkGray
+        clearButton.tintColor = .Colors.Font.darkGray
         clearButton.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
         clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
         
@@ -69,4 +70,3 @@ extension UITextField {
         sendActions(for: .editingChanged)
     }
 }
-

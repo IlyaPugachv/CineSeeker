@@ -259,20 +259,12 @@ extension Home.View: CustomSegmentedControlDelegate {
 
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        if collectionView == topFilmsCollectionView {
-            return 1
-        } else if collectionView == fullListFilmsCollection {
-            return 3
-        }
-        return 0
-    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      
         if collectionView == topFilmsCollectionView {
             return topMovies.count
+            
         } else if collectionView == fullListFilmsCollection {
             return bestMovies.count
         }
@@ -281,59 +273,92 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == topFilmsCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopFilmsCell.reuseId, for: indexPath) as? TopFilmsCell else {
+            
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TopFilmsCell.reuseId,
+                for: indexPath) as? TopFilmsCell else {
                 fatalError("Unable to dequeue TopFilmsCell")
             }
+            
             let movie = topMovies[indexPath.item]
             cell.configure(with: movie)
             return cell
+            
         } else if collectionView == fullListFilmsCollection {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullListFilmsCell.reuseId, for: indexPath) as? FullListFilmsCell else {
+            
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: FullListFilmsCell.reuseId,
+                for: indexPath) as? FullListFilmsCell else {
                 fatalError("Unable to dequeue FullListFilmsCell")
             }
+            
             let movie = bestMovies[indexPath.item]
             cell.configure(with: movie)
             return cell
         }
-
+        
         return UICollectionViewCell()
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie: MovieRandom
+        let image: UIImage?
+        
         if collectionView == topFilmsCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? TopFilmsCell,
-                  let image = cell.posterImageView.image else {
-                return
-            }
             
-            let movie = topMovies[indexPath.item]
+            guard let cell = collectionView.cellForItem(at: indexPath) as? TopFilmsCell else { return }
+            movie = topMovies[indexPath.item]
+            image = cell.posterImageView.image
             
-            NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
-                switch result {
-                case .success(let reviewModel):
-                    let reviews = reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
-                    let author = reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
-                    let genres = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
-                    
-                    DispatchQueue.main.async {
-                        self.presenter.showFilmDetail(
-                            imageMovie: image,
-                            nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
-                            rating: movie.rating?.imdb ?? 0.0,
-                            year: movie.year ?? 2024,
-                            movieLength: movie.movieLength ?? 100,
-                            genres: genres,
-                            aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription,
-                            autor: author,
-                            review: reviews
-                        )
-                    }
-                case .failure(let error):
-                    print("Error fetching reviews: \(error.localizedDescription)")
-                }
-            }
         } else if collectionView == fullListFilmsCollection {
-           
+            guard let cell = collectionView.cellForItem(at: indexPath) as? FullListFilmsCell else { return }
+            movie = bestMovies[indexPath.item]
+            image = cell.posterImageView.image
+            
+        } else { return }
+        
+        guard let posterImage = image else { return }
+        
+        fetchReviewsForMovie(movie, image: posterImage)
+    }
+
+    private func fetchReviewsForMovie(_ movie: MovieRandom, image: UIImage) {
+        NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
+            switch result {
+            case .success(let reviewModel):
+                let reviews = self.formatReviews(from: reviewModel)
+                let authors = self.formatAuthors(from: reviewModel)
+                let genres = self.formatGenres(from: movie)
+                
+                DispatchQueue.main.async {
+                    self.presenter.showFilmDetail(
+                        imageMovie: image,
+                        nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+                        rating: movie.rating?.imdb ?? 0.0,
+                        year: movie.year ?? 2024,
+                        movieLength: movie.movieLength ?? 100,
+                        genres: genres,
+                        aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription,
+                        autor: authors,
+                        review: reviews
+                    )
+                }
+                
+            case .failure(let error):
+                print("Error fetching reviews: \(error.localizedDescription)")
+            }
         }
+    }
+
+    private func formatReviews(from reviewModel: ReviewModel) -> String {
+        reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
+    }
+
+    private func formatAuthors(from reviewModel: ReviewModel) -> String {
+        reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
+    }
+
+    private func formatGenres(from movie: MovieRandom) -> String {
+        movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
     }
 }
