@@ -74,8 +74,8 @@ extension Search {
                 cornerRadius: 12
             )
             
-            noMovieView.image = UIImage(named: "boxIcon")
-            noMovieView.headerText = "No movies available"
+            noMovieView.image = UIImage(named: "searchBox")
+            noMovieView.headerText = "we are sorry, we can not find the movie :("
             noMovieView.findYourMovieText = "Please search for your favorite movies"
             
             hideKeyboardWhenTappedAround()
