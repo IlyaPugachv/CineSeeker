@@ -10,6 +10,7 @@ extension Search {
         
         // MARK: - Subviews -
        
+        private let searchTextField: UITextField = .init()
        
         // MARK: - Initializers -
         
@@ -48,13 +49,36 @@ extension Search {
         
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
+            
+            view.addView(searchTextField)
         }
         
         private func configureSubviews() {
+            
+            searchTextField.configureTextField(
+                placeholder: .Localization.search,
+                font: .interRegular(of: 14),
+                icon: UIImage(systemName: "magnifyingglass"),
+                iconColor: .Colors.Font.lightGray,
+                backgroundColor: .Colors.Font.gray,
+                cornerRadius: 12
+            )
+            
+            hideKeyboardWhenTappedAround()
 
         }
         
         private func layoutSubviews() {
+            
+            NSLayoutConstraint.activate([
+                
+                searchTextField.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                searchTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
+                searchTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
+                searchTextField.widthAnchor.constraint(equalToConstant: 327),
+                searchTextField.heightAnchor.constraint(equalToConstant: 42),
+                
+            ])
 
         }
         
