@@ -58,6 +58,10 @@ extension WatchList {
         private func configureSubviews() {
             watchListCollection.delegate = self
             watchListCollection.dataSource = self
+            
+            noMovieView.image = UIImage(named: "boxIcon")
+            noMovieView.headerText = "No movies available"
+            noMovieView.findYourMovieText = "Please search for your favorite movies"
         }
         
         private func layoutSubviews() {

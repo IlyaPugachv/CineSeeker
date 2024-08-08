@@ -13,6 +13,7 @@ extension Search {
         // MARK: - Subviews -
        
         private let searchTextField: UITextField = .init()
+        private let noMovieView = NoMovieView()
         private let collectionView = WatchListCollection()
        
         // MARK: - Initializers -
@@ -53,12 +54,17 @@ extension Search {
         private func buildHierarchy() {
             view.backgroundColor = .Colors.Font.darkGray
             
-            view.addView(searchTextField)
-            view.addView(collectionView)
-        }
-        
-        private func configureSubviews() {
+            noMovieView.isHidden = false
+            collectionView.isHidden = true
             
+            view.addView(noMovieView)
+            view.addView(collectionView)
+            view.addView(searchTextField)
+            
+            view.bringSubviewToFront(searchTextField)
+        }
+
+        private func configureSubviews() {
             searchTextField.configureTextField(
                 placeholder: .Localization.search,
                 font: .interRegular(of: 14),
@@ -68,6 +74,10 @@ extension Search {
                 cornerRadius: 12
             )
             
+            noMovieView.image = UIImage(named: "boxIcon")
+            noMovieView.headerText = "No movies available"
+            noMovieView.findYourMovieText = "Please search for your favorite movies"
+            
             hideKeyboardWhenTappedAround()
             
             collectionView.register(WatchListCell.self, forCellWithReuseIdentifier: WatchListCell.reuseId)
@@ -76,13 +86,18 @@ extension Search {
         }
         
         private func layoutSubviews() {
-           
+        
             NSLayoutConstraint.activate([
-                searchTextField.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                searchTextField.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 12),
                 searchTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 12),
                 searchTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -12),
                 searchTextField.heightAnchor.constraint(equalToConstant: 42),
-                
+
+                noMovieView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                noMovieView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                noMovieView.widthAnchor.constraint(equalTo: view.widthAnchor),
+                noMovieView.heightAnchor.constraint(equalTo: view.heightAnchor),
+
                 collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10),
                 collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -95,8 +110,18 @@ extension Search {
         }
 
         @objc private func textFieldDidChange(_ textField: UITextField) {
-            guard let query = textField.text, !query.isEmpty else { return }
-            performSearch(query: query)
+            guard let query = textField.text else { return }
+
+            if query.isEmpty {
+              
+                noMovieView.isHidden = false
+                collectionView.isHidden = true
+            } else {
+                
+                noMovieView.isHidden = true
+                collectionView.isHidden = false
+                performSearch(query: query)
+            }
         }
 
         private func performSearch(query: String) {
@@ -108,10 +133,16 @@ extension Search {
                 case .success(let movieResponse):
                     self?.searchResults = movieResponse.docs ?? []
                     DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
+                        if self?.searchResults.isEmpty == true {
+                            self?.noMovieView.isHidden = false
+                            self?.collectionView.isHidden = true
+                        } else {
+                            self?.noMovieView.isHidden = true
+                            self?.collectionView.isHidden = false
+                            self?.collectionView.reloadData()
+                        }
                     }
                 case .failure(let error):
-                   
                     print("Error fetching movies: \(error)")
                 }
             }
@@ -125,7 +156,7 @@ extension Search.View: SearchView { }
 
 extension Search.View: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResults.count
+        searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -147,7 +178,6 @@ extension Search.View: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.movieLengthLabel.text = "\(movie.movieLength ?? 107) minutes"
         
         if let posterUrl = movie.poster?.previewUrl {
-           
             cell.profileImageView.sd_setImage(with: URL(string: posterUrl), completed: nil)
         } else {
             cell.profileImageView.image = nil

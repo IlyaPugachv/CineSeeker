@@ -3,39 +3,44 @@ import UIKit
 final class NoMovieView: UIView {
     
     private let boxImageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        
-        image.configureImage(
-            named: "boxIcon")
-        
-        return image
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private let headerNoMovieLabel: UILabel = {
         let label = UILabel()
-        
-        label.configureLabel(
-            text: .Localization.thereIsNoMovieYet,
-            font: .interSemibold(of: 16),
-            color: .white
-        )
-        
+        label.font = .interSemibold(of: 16)
+        label.textColor = .white
         return label
     }()
     
     private let findYourMovieLabel: UILabel = {
         let label = UILabel()
-        
-        label.configureLabel(
-            text: .Localization.findYourMovie,
-            font: .interMedium(of: 12),
-            color: .Colors.Font.lightGray,
-            numberOfLines: 0
-        )
-        
+        label.font = .interMedium(of: 12)
+        label.textColor = .Colors.Font.lightGray
+        label.numberOfLines = 0
         return label
     }()
+    
+    // Public properties to set image and text
+    var image: UIImage? {
+        didSet {
+            boxImageView.image = image
+        }
+    }
+    
+    var headerText: String? {
+        didSet {
+            headerNoMovieLabel.text = headerText
+        }
+    }
+    
+    var findYourMovieText: String? {
+        didSet {
+            findYourMovieLabel.text = findYourMovieText
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,17 +53,19 @@ final class NoMovieView: UIView {
     }
     
     private func setupView() {
-        addView(boxImageView)
-        addView(headerNoMovieLabel)
-        addView(findYourMovieLabel)
+        addSubview(boxImageView)
+        addSubview(headerNoMovieLabel)
+        addSubview(findYourMovieLabel)
         
-        setupConstrains()
+        setupConstraints()
     }
     
-    private func setupConstrains() {
+    private func setupConstraints() {
+        boxImageView.translatesAutoresizingMaskIntoConstraints = false
+        headerNoMovieLabel.translatesAutoresizingMaskIntoConstraints = false
+        findYourMovieLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             boxImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             boxImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             boxImageView.widthAnchor.constraint(equalToConstant: 76),
