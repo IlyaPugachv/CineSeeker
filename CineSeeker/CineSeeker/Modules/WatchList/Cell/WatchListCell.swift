@@ -19,11 +19,29 @@ final class WatchListCell: UICollectionViewCell {
         return label
     }()
     
+    let ratingImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Star")
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        return imageView
+    }()
+    
     let ratingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .lightGray
+        label.textColor = .Colors.orange
         return label
+    }()
+    
+    let genreImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Genre")
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        return imageView
     }()
     
     let genreLabel: UILabel = {
@@ -34,12 +52,30 @@ final class WatchListCell: UICollectionViewCell {
         return label
     }()
     
+    let releaseDateImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Calendar")
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        return imageView
+    }()
+    
     let releaseDateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.textColor = .white
         label.numberOfLines = 0
         return label
+    }()
+    
+    let movieLengthImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Clock")
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        return imageView
     }()
     
     let movieLengthLabel: UILabel = {
@@ -64,11 +100,23 @@ final class WatchListCell: UICollectionViewCell {
         contentView.addView(profileImageView)
         contentView.addView(textStackView)
         
+        let ratingStackView = UIStackView(arrangedSubviews: [ratingImageView, ratingLabel])
+        ratingStackView.spacing = 5
+        
+        let genreStackView = UIStackView(arrangedSubviews: [genreImageView, genreLabel])
+        genreStackView.spacing = 5
+        
+        let releaseDateStackView = UIStackView(arrangedSubviews: [releaseDateImageView, releaseDateLabel])
+        releaseDateStackView.spacing = 5
+        
+        let movieLengthStackView = UIStackView(arrangedSubviews: [movieLengthImageView, movieLengthLabel])
+        movieLengthStackView.spacing = 5
+        
         textStackView.addArrangedSubview(filmNameLabel)
-        textStackView.addArrangedSubview(ratingLabel)
-        textStackView.addArrangedSubview(genreLabel)
-        textStackView.addArrangedSubview(releaseDateLabel)
-        textStackView.addArrangedSubview(movieLengthLabel)
+        textStackView.addArrangedSubview(ratingStackView)
+        textStackView.addArrangedSubview(genreStackView)
+        textStackView.addArrangedSubview(releaseDateStackView)
+        textStackView.addArrangedSubview(movieLengthStackView)
         
         setupConstraints()
     }
@@ -80,23 +128,15 @@ final class WatchListCell: UICollectionViewCell {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             profileImageView.widthAnchor.constraint(equalToConstant: 95),
             profileImageView.heightAnchor.constraint(equalToConstant: 120),
             
+            textStackView.topAnchor.constraint(equalTo: profileImageView.topAnchor),
             textStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            textStackView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
-            
-            filmNameLabel.topAnchor.constraint(equalTo: textStackView.topAnchor),
-            ratingLabel.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 5),
-            genreLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),
-            releaseDateLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 5),
-            movieLengthLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 5)
+            textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            textStackView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor)
         ])
     }
 }
-
-

@@ -23,7 +23,6 @@ final class NoMovieView: UIView {
         return label
     }()
     
-    // Public properties to set image and text
     var image: UIImage? {
         didSet {
             boxImageView.image = image
@@ -53,17 +52,14 @@ final class NoMovieView: UIView {
     }
     
     private func setupView() {
-        addSubview(boxImageView)
-        addSubview(headerNoMovieLabel)
-        addSubview(findYourMovieLabel)
+        addView(boxImageView)
+        addView(headerNoMovieLabel)
+        addView(findYourMovieLabel)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
-        boxImageView.translatesAutoresizingMaskIntoConstraints = false
-        headerNoMovieLabel.translatesAutoresizingMaskIntoConstraints = false
-        findYourMovieLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             boxImageView.centerXAnchor.constraint(equalTo: centerXAnchor),

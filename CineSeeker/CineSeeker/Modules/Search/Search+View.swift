@@ -167,7 +167,7 @@ extension Search.View: UICollectionViewDataSource, UICollectionViewDelegate {
         let movie = searchResults[indexPath.row]
         
         cell.filmNameLabel.text = movie.name
-        cell.ratingLabel.text = movie.ratingMpaa
+        cell.ratingLabel.text = "\(movie.rating?.imdb ?? 10)"
         
         if let genres = movie.genres {
             cell.genreLabel.text = genres.compactMap { $0.name }.joined(separator: ", ")
