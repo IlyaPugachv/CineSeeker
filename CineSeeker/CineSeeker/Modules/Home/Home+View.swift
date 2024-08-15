@@ -112,8 +112,6 @@ extension Home {
             ]
             
             customSegmentedControl.delegate = self
-
-            hideKeyboardWhenTappedAround()
         }
         
         private func layoutSubviews() {

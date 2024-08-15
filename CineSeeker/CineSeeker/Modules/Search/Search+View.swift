@@ -78,11 +78,13 @@ extension Search {
             noMovieView.headerText = "we are sorry, we can not find the movie :("
             noMovieView.findYourMovieText = "Please search for your favorite movies"
             
-            hideKeyboardWhenTappedAround()
+       
             
             collectionView.register(WatchListCell.self, forCellWithReuseIdentifier: WatchListCell.reuseId)
             collectionView.dataSource = self
             collectionView.delegate = self
+            
+        
         }
         
         private func layoutSubviews() {

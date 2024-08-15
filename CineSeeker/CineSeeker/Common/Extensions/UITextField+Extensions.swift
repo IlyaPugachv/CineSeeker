@@ -1,6 +1,7 @@
 import UIKit
 
 extension UITextField {
+
     func configureTextField(
         placeholder: String? = nil,
         font: UIFont = .systemFont(ofSize: 14),
@@ -27,16 +28,31 @@ extension UITextField {
         self.textColor = textColor
         
         if let icon = icon {
-            let iconView = UIImageView(frame: CGRect(x: leftViewPadding, y: 5, width: 20, height: 20))
+            let iconView = UIImageView(frame: CGRect(
+                x: leftViewPadding,
+                y: 5, width: 20,
+                height: 20))
+            
             iconView.image = icon.withRenderingMode(.alwaysTemplate)
             iconView.tintColor = iconColor
             iconView.contentMode = .scaleAspectFit
             
-            let iconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30 + leftViewPadding, height: 30))
+            let iconContainerView = UIView(frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 30 + leftViewPadding,
+                height: 30))
+            
             iconContainerView.addSubview(iconView)
             self.leftView = iconContainerView
+            
         } else {
-            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
+            let paddingView = UIView(frame: CGRect(
+                x: 0,
+                y: 0,
+                width: padding,
+                height: frame.height))
+            
             self.leftView = paddingView
         }
         self.leftViewMode = .always
@@ -46,27 +62,68 @@ extension UITextField {
             attributes: [.foregroundColor: placeholderColor]
         )
         
-        addClearButton()
-    }
-    
-    func addClearButton() {
-        let clearButton = UIButton(type: .custom)
-        clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        clearButton.tintColor = .Colors.Font.darkGray
-        clearButton.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
-        clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
-        
-        let clearButtonContainer = UIView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
-        clearButtonContainer.addSubview(clearButton)
-        clearButton.center = clearButtonContainer.center
-        
-        self.rightView = clearButtonContainer
-        self.rightViewMode = .whileEditing
+        addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
     }
     
     @objc
-    private func clearText() {
+    private func textFieldDidBeginEditing() {
+        showCancelButton()
+    }
+    
+    private func showCancelButton() {
+        guard let superview = self.superview else { return }
+
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setTitle("Отмена", for: .normal)
+        cancelButton.setTitleColor(.Colors.Font.lightGray, for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        cancelButton.tag = 1001
+
+        superview.addView(cancelButton)
+
+        NSLayoutConstraint.activate([
+            cancelButton.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -16),
+            cancelButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            cancelButton.heightAnchor.constraint(equalTo: self.heightAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: 75)
+        ])
+        
+        self.frame.size.width -= 75
+        
+        cancelButton.isHidden = false
+        
+        addTarget(self, action: #selector(textFieldTextChanged), for: .editingChanged)
+    }
+    
+    @objc 
+    private func cancelButtonPressed() {
         self.text = ""
-        sendActions(for: .editingChanged)
+        
+        self.resignFirstResponder()
+        
+        hideCancelButton()
+    }
+
+    private func hideCancelButton() {
+        guard let superview = self.superview else { return }
+
+        if let cancelButton = superview.viewWithTag(1001) {
+            self.frame.size.width += 75
+            
+            cancelButton.isHidden = true
+            
+            cancelButton.removeFromSuperview()
+        }
+        
+        removeTarget(self, action: #selector(textFieldTextChanged), for: .editingChanged)
+    }
+
+    @objc 
+    private func textFieldTextChanged() {
+        guard let superview = self.superview,
+              let cancelButton = superview.viewWithTag(1001) else { return }
+
+        cancelButton.isHidden = self.text?.isEmpty ?? true
     }
 }
+
