@@ -17,11 +17,11 @@ extension Home {
         private let searchTextField: UITextField = .init()
         
         private var selectedSegmentIndex: Int = 0 {
-                   didSet {
-                       updateCollectionData(for: selectedSegmentIndex)
-                   }
-               }
-  
+            didSet {
+                updateCollectionData(for: selectedSegmentIndex)
+            }
+        }
+        
         private let topFilmsCollectionView = TopFilmsCollectionView()
         private let customSegmentedControl = CustomSegmentedControl()
         private let fullListFilmsCollection = FullListFilmsCollection()
@@ -258,7 +258,7 @@ extension Home.View: CustomSegmentedControlDelegate {
 extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == topFilmsCollectionView {
             return topMovies.count
@@ -268,7 +268,7 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         return 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == topFilmsCollectionView {
             
@@ -297,7 +297,7 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
         
         return UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie: MovieRandom
         let image: UIImage?
@@ -319,14 +319,14 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
         
         fetchReviewsForMovie(movie, image: posterImage)
     }
-
+    
     private func fetchReviewsForMovie(_ movie: MovieRandom, image: UIImage) {
         NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
             switch result {
             case .success(let reviewModel):
-                let reviews = self.formatReviews(from: reviewModel)
-                let authors = self.formatAuthors(from: reviewModel)
-                let genres = self.formatGenres(from: movie)
+                let reviews = reviewModel.formattedReviews()
+                let authors = reviewModel.formattedAuthors()
+                let genres = movie.formattedGenres()
                 
                 DispatchQueue.main.async {
                     self.presenter.showFilmDetail(
@@ -346,17 +346,5 @@ extension Home.View: HomeView, UICollectionViewDelegate, UICollectionViewDataSou
                 print("Error fetching reviews: \(error.localizedDescription)")
             }
         }
-    }
-
-    private func formatReviews(from reviewModel: ReviewModel) -> String {
-        reviewModel.docs?.compactMap { $0.review }.joined(separator: "\n\n") ?? "No reviews available"
-    }
-
-    private func formatAuthors(from reviewModel: ReviewModel) -> String {
-        reviewModel.docs?.compactMap { $0.author }.joined(separator: "\n\n") ?? "No author available"
-    }
-
-    private func formatGenres(from movie: MovieRandom) -> String {
-        movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
     }
 }

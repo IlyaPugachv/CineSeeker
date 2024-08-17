@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC16632E2C70816F000B151A /* FormattedAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC16632D2C70816F000B151A /* FormattedAuthors.swift */; };
 		BC2B28522C453F4000329A3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28512C453F4000329A3C /* AppDelegate.swift */; };
 		BC2B28542C453F4000329A3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B28532C453F4000329A3C /* SceneDelegate.swift */; };
 		BC2B285B2C453F4200329A3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2B285A2C453F4200329A3C /* Assets.xcassets */; };
@@ -84,6 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC16632D2C70816F000B151A /* FormattedAuthors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedAuthors.swift; sourceTree = "<group>"; };
 		BC2B284E2C453F4000329A3C /* CineSeeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineSeeker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2B28512C453F4000329A3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2B28532C453F4000329A3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				BC2B28D32C49194000329A3C /* UITextField+Extensions.swift */,
 				BCE471312C4F9F7C00FE52EB /* UIStackView+Extensions.swift */,
 				BCE471332C4FA09B00FE52EB /* UIImageView+Extensions.swift */,
+				BC16632D2C70816F000B151A /* FormattedAuthors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				BC2B28F82C4A7ECF00329A3C /* Detail+Presenter.swift in Sources */,
 				BC2B28872C454A0200329A3C /* SearchView.swift in Sources */,
 				BC8928BC2C57845A001006AF /* WatchListCell.swift in Sources */,
+				BC16632E2C70816F000B151A /* FormattedAuthors.swift in Sources */,
 				BCEFC2562C5A372500666979 /* MovieIdsResponseModel.swift in Sources */,
 				BC2B28E12C4924CF00329A3C /* NetworkManager.swift in Sources */,
 				BC2B28BB2C49048500329A3C /* String+Localization.swift in Sources */,

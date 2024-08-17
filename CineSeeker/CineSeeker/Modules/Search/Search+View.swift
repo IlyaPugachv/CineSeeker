@@ -187,4 +187,51 @@ extension Search.View: UICollectionViewDataSource, UICollectionViewDelegate {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie: MovieRandom
+        let image: UIImage?
+
+        // Compare with the actual instance of the collectionView
+        if collectionView == self.collectionView {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? WatchListCell else { return }
+            movie = searchResults[indexPath.item]
+            image = cell.profileImageView.image
+        } else {
+            return
+        }
+
+        guard let posterImage = image else { return }
+        
+        // Continue with your logic, such as fetching movie reviews or showing details
+        fetchReviewsForMovie(movie, image: posterImage)
+    }
+
+    private func fetchReviewsForMovie(_ movie: MovieRandom, image: UIImage) {
+        NetworkManager.getReviewsForMovie(movieId: movie.id ?? 0) { result in
+            switch result {
+            case .success(let reviewModel):
+                let reviews = reviewModel.formattedReviews()
+                let authors = reviewModel.formattedAuthors()
+                let genres = movie.formattedGenres()
+
+                DispatchQueue.main.async {
+                    self.presenter.showFilmDetail(
+                        imageMovie: image,
+                        nameMovie: movie.name ?? .Localization.errorGettingTheMovieName,
+                        rating: movie.rating?.imdb ?? 0.0,
+                        year: movie.year ?? 2024,
+                        movieLength: movie.movieLength ?? 100,
+                        genres: genres,
+                        aboutMovie: movie.description ?? .Localization.errorWhenGettingTheMovieDescription,
+                        autor: authors,
+                        review: reviews
+                    )
+                }
+
+            case .failure(let error):
+                print("Error fetching reviews: \(error.localizedDescription)")
+            }
+        }
+    }
 }

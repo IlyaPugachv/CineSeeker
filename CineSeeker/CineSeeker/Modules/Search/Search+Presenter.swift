@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 extension Search {
     class Presenter {
@@ -19,6 +19,19 @@ extension Search {
         
         // MARK: - Methods -
         
+        func showFilmDetail(imageMovie: UIImage?, nameMovie: String, rating: Double, year: Int, movieLength: Int, genres: String, aboutMovie: String, autor: String, review: String) {
+            
+            view?.navigate(to: Detail.View(with: .init(
+                image: imageMovie,
+                title: nameMovie,
+                rating: rating,
+                year: year,
+                movieLength: movieLength,
+                genres: genres,
+                aboutMovie: aboutMovie,
+                autor: autor,
+                review: review)), animated: true)
+        }
         
     }
 }
